@@ -2690,14 +2690,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var savedLang = localStorage.getItem('preferredLang') || 'it';
     setLang(savedLang);
 });
-(function () {
-    var savedLang = localStorage.getItem('preferredLang') || 'it';
-    document.body.classList.add('lang-' + savedLang);
-    document.documentElement.lang = savedLang;
-    document.title = savedLang === 'it'
-        ? 'Messaggio inviato — Gianluca Sottile'
-        : 'Message sent — Gianluca Sottile';
-})();
 
 // Load saved language
 var savedLang = localStorage.getItem('preferredLang');
