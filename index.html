@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gianluca Sottile — Associate Professor of Statistics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #8B1A2D;
+  --primary-light: #A52A3A;
+  --accent: #C9A227;
+  --accent-light: #D4AF37;
+  --bg: #fafbfc;
+  --surface: #ffffff;
+  --text: #1a1a2e;
+  --text-muted: #5a5a6e;
+  --border: #e2e8f0;
+  --shadow: 0 4px 20px rgba(139,26,45,0.08);
+  --shadow-hover: 0 8px 30px rgba(139,26,45,0.12);
+  --radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:80px; }
+body {
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== HEADER ===== */
+header {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  background:rgba(255,255,255,0.96); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border); transition:var(--transition);
+}
+.header-inner {
+  max-width:1200px; margin:0 auto; padding:0 24px;
+  display:flex; align-items:center; justify-content:space-between; height:70px;
+}
+.brand {
+  display:flex; align-items:center; gap:14px; text-decoration:none;
+}
+.brand-avatar {
+  width:44px; height:44px; border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  display:flex; align-items:center; justify-content:center;
+  color:white; font-weight:700; font-size:1.1rem; flex-shrink:0;
+}
+.brand-text h1 {
+  font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700;
+  color:var(--primary); line-height:1.2;
+}
+.brand-text span {
+  font-size:0.75rem; color:var(--text-muted); font-weight:500; letter-spacing:0.02em;
+}
+
+/* ===== LANG TOGGLE ===== */
+    /*.lang-toggle {
+  display:flex; align-items:center; gap:6px;
+  background:var(--bg); border:1.5px solid var(--border);
+  border-radius:20px; padding:3px;
+  margin-left:12px;
+  flex-shrink:0;
+}
+.lang-btn {
+  padding:5px 12px; border-radius:16px; border:none; background:none;
+  font-size:0.8rem; font-weight:600; color:var(--text-muted);
+  cursor:pointer; transition:var(--transition); font-family:inherit;
+}
+.lang-btn.active {
+  background:var(--primary); color:white;
+}
+.lang-btn:hover:not(.active) {
+  color:var(--primary); background:rgba(139,26,45,0.06);
+}*/
+.lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 3px;
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+.lang-btn {
+    padding: 5px 12px;
+    border-radius: 16px;
+    border: none;
+    background: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+.lang-btn.active {
+    background: var(--primary);
+    color: white;
+}
+.lang-btn:hover:not(.active) {
+    color: var(--primary);
+    background: rgba(139,26,45,0.06);
+}
+
+/* ===== NAVIGATION ===== */
+nav { display:flex; align-items:center; gap:4px; }
+.nav-link {
+  padding:8px 14px; border-radius:8px; text-decoration:none;
+  color:var(--text-muted); font-size:0.88rem; font-weight:500;
+  transition:var(--transition); cursor:pointer; border:none; background:none; font-family:inherit;
+}
+.nav-link:hover,.nav-link.active {
+  color:var(--primary); background:rgba(139,26,45,0.07);
+}
+.mobile-menu-btn {
+  display:none; background:none; border:none; cursor:pointer;
+  padding:8px; color:var(--primary);
+}
+.mobile-menu-btn svg { width:24px; height:24px; }
+.mobile-nav {
+  display:none; position:fixed; top:70px; left:0; right:0;
+  background:rgba(255,255,255,0.98); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border); padding:16px 24px;
+  flex-direction:column; gap:4px; z-index:999; box-shadow:var(--shadow);
+}
+.mobile-nav.open { display:flex; }
+.mobile-nav .nav-link { padding:12px 16px; font-size:1rem; }
+
+main {
+  max-width:1200px; margin:0 auto; padding:100px 24px 60px; min-height:100vh;
+}
+.section { display:none; animation:fadeIn 0.35s ease; }
+.section.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== BILINGUAL CONTENT ===== */
+[data-lang] {
+  display: none !important;
+}
+
+/* Elementi inline */
+body.lang-it span[data-lang="it"],
+body.lang-it strong[data-lang="it"],
+body.lang-it a[data-lang="it"],
+body.lang-it label[data-lang="it"],
+body.lang-it em[data-lang="it"],
+body.lang-en span[data-lang="en"],
+body.lang-en strong[data-lang="en"],
+body.lang-en a[data-lang="en"],
+body.lang-en label[data-lang="en"],
+body.lang-en em[data-lang="en"] {
+  display: inline !important;
+}
+
+/* Elementi block */
+body.lang-it div[data-lang="it"],
+body.lang-it p[data-lang="it"],
+body.lang-it h1[data-lang="it"],
+body.lang-it h2[data-lang="it"],
+body.lang-it h3[data-lang="it"],
+body.lang-it h4[data-lang="it"],
+body.lang-it li[data-lang="it"],
+body.lang-it section[data-lang="it"],
+body.lang-en div[data-lang="en"],
+body.lang-en p[data-lang="en"],
+body.lang-en h1[data-lang="en"],
+body.lang-en h2[data-lang="en"],
+body.lang-en h3[data-lang="en"],
+body.lang-en h4[data-lang="en"],
+body.lang-en li[data-lang="en"],
+body.lang-en section[data-lang="en"] {
+  display: block !important;
+}
+
+/* Tag/chips */
+body.lang-it .tag[data-lang="it"],
+body.lang-en .tag[data-lang="en"] {
+  display: inline-block !important;
+}
+
+/* Pulsanti e link con testo bilingue */
+body.lang-it .btn span[data-lang="it"],
+body.lang-en .btn span[data-lang="en"],
+body.lang-it .nav-link span[data-lang="it"],
+body.lang-en .nav-link span[data-lang="en"],
+body.lang-it .section-title span[data-lang="it"],
+body.lang-en .section-title span[data-lang="en"],
+body.lang-it .section-subtitle span[data-lang="it"],
+body.lang-en .section-subtitle span[data-lang="en"] {
+  display: inline !important;
+}
+    
+/* Contact items: titolo su una riga, testo su quella sotto */
+body.lang-it .contact-item > div:last-child > span[data-lang="it"] {
+    display: block !important;
+}
+body.lang-en .contact-item > div:last-child > span[data-lang="en"] {
+    display: block !important;
+}
+
+.hero {
+  display:grid; grid-template-columns:200px 1fr; gap:40px;
+  align-items:start; margin-bottom:40px;
+}
+.hero-photo {
+  width:200px; height:200px; border-radius:var(--radius);
+  object-fit:cover; box-shadow:var(--shadow);
+}
+.hero-content h2 {
+  font-family:'Playfair Display',serif; font-size:2.2rem;
+  color:var(--primary); margin-bottom:6px; line-height:1.2;
+}
+.hero-role {
+  font-size:1.05rem; color:var(--accent); font-weight:600; margin-bottom:8px;
+}
+.hero-affiliation {
+  color:var(--text-muted); font-size:0.95rem; margin-bottom:20px; line-height:1.6;
+}
+.hero-bio {
+  color:var(--text); font-size:1rem; line-height:1.8; margin-bottom:24px;
+}
+.hero-links {
+  display:flex; gap:12px; flex-wrap:wrap;
+}
+.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 20px; border-radius:8px; text-decoration:none;
+  font-size:0.9rem; font-weight:500; transition:var(--transition);
+  cursor:pointer; border:none; font-family:inherit;
+}
+.btn-primary {
+  background:var(--primary); color:white;
+}
+.btn-primary:hover {
+  background:var(--primary-light); transform:translateY(-1px); box-shadow:var(--shadow-hover);
+}
+.btn-outline {
+  background:transparent; color:var(--primary); border:1.5px solid var(--border);
+}
+.btn-outline:hover { border-color:var(--primary); background:rgba(139,26,45,0.04); }
+.btn-sm { padding:6px 14px; font-size:0.85rem; }
+
+.news-banner {
+  background:linear-gradient(135deg,#fefce8,#fef9c3);
+  border:1px solid #fde047; border-radius:var(--radius);
+  padding:20px 24px; margin-bottom:36px;
+}
+.news-banner h3 {
+  font-size:0.9rem; font-weight:700; color:#854d0e;
+  margin-bottom:12px; display:flex; align-items:center; gap:8px;
+}
+.news-banner ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.news-banner li {
+  font-size:0.9rem; color:#713f12; line-height:1.5;
+  padding-left:20px; position:relative;
+}
+.news-banner li::before { content:"▸"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+.news-banner em { font-style:italic; color:#92400e; }
+
+.section-title {
+  font-family:'Playfair Display',serif; font-size:1.7rem;
+  color:var(--primary); margin-bottom:8px; display:flex; align-items:center; gap:12px;
+}
+.section-subtitle {
+  color:var(--text-muted); font-size:0.95rem;
+  margin-bottom:32px; padding-bottom:16px; border-bottom:1px solid var(--border);
+}
+.tags-row {
+  display:flex; flex-wrap:wrap; gap:8px; margin-bottom:36px;
+}
+.tag {
+  display:inline-block; padding:6px 14px; border-radius:20px;
+  font-size:0.82rem; font-weight:500;
+  background:rgba(139,26,45,0.06); color:var(--primary); border:1px solid var(--border);
+}
+
+.cards-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px;
+}
+.card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px; transition:var(--transition);
+}
+.card:hover {
+  box-shadow:var(--shadow-hover); transform:translateY(-2px); border-color:transparent;
+}
+.card-header {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  margin-bottom:12px; flex-wrap:wrap; gap:6px;
+}
+.card-tag {
+  display:inline-block; padding:4px 10px; border-radius:20px;
+  font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.03em;
+}
+.tag-course { background:#e8f4f8; color:#1a6b8a; }
+.tag-phd { background:#f3e8ff; color:#6b21a8; }
+.tag-paper { background:#fef3c7; color:#92400e; }
+.tag-software { background:#dcfce7; color:#166534; }
+.tag-award { background:#fee2e2; color:#991b1b; }
+.tag-year { background:var(--bg); color:var(--text-muted); }
+.tag-project { background:#dbeafe; color:#1e40af; }
+.tag-talk { background:#fce7f3; color:#9d174d; }
+.card h3 {
+  font-size:1.08rem; font-weight:600; color:var(--text); margin-bottom:8px; line-height:1.4;
+}
+.card p {
+  color:var(--text-muted); font-size:0.9rem; line-height:1.6;
+}
+.card-meta {
+  display:flex; gap:16px; margin-top:16px; padding-top:16px;
+  border-top:1px solid var(--border); font-size:0.85rem; color:var(--text-muted); flex-wrap:wrap;
+}
+.card-meta span { display:flex; align-items:center; gap:6px; }
+.card-actions {
+  margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;
+}
+
+.timeline { position:relative; padding-left:28px; }
+.timeline::before {
+  content:''; position:absolute; left:6px; top:8px; bottom:8px;
+  width:2px; background:var(--border);
+}
+.timeline-item { position:relative; margin-bottom:28px; }
+.timeline-item::before {
+  content:''; position:absolute; left:-26px; top:6px;
+  width:10px; height:10px; border-radius:50%;
+  background:var(--accent); border:2px solid var(--surface);
+  box-shadow:0 0 0 2px var(--accent);
+}
+.timeline-year {
+  font-size:0.8rem; font-weight:600; color:var(--accent); margin-bottom:4px;
+}
+.timeline-title { font-weight:600; color:var(--text); margin-bottom:4px; }
+.timeline-desc { font-size:0.9rem; color:var(--text-muted); line-height:1.5; }
+
+.pub-list { display:flex; flex-direction:column; gap:14px; }
+.pub-item {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:20px 24px; transition:var(--transition);
+}
+.pub-item:hover { border-color:var(--primary); box-shadow:var(--shadow); }
+.pub-title {
+  font-weight:600; color:var(--primary); font-size:1rem;
+  margin-bottom:6px; line-height:1.4;
+}
+.pub-authors { font-size:0.9rem; color:var(--text); margin-bottom:4px; }
+.pub-venue { font-size:0.85rem; color:var(--text-muted); font-style:italic; }
+.pub-badges { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+.badge {
+  padding:3px 10px; border-radius:4px; font-size:0.75rem; font-weight:500;
+}
+.badge-journal { background:#dbeafe; color:#1e40af; }
+.badge-conference { background:#fef3c7; color:#92400e; }
+.badge-preprint { background:#f3f4f6; color:#4b5563; }
+.badge-open { background:#dcfce7; color:#166534; }
+.badge-book { background:#f3e8ff; color:#6b21a8; }
+
+/* ===== RESEARCH SECTION ===== */
+.research-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(139,26,45,0.08);
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.selected-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.selected-card {
+  background: linear-gradient(135deg, #ffffff, #fcfafb);
+  border: 1px solid rgba(139,26,45,0.12);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.selected-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.selected-card .pub-title {
+  font-size: 1.04rem;
+  margin-bottom: 10px;
+}
+
+.selected-card .pub-authors {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.selected-card .pub-venue {
+  font-size: 0.86rem;
+  margin-bottom: 14px;
+}
+
+.research-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 8px 0 32px;
+}
+
+.year-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.year-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(139,26,45,0.06);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.year-chip:hover {
+  background: rgba(139,26,45,0.12);
+  border-color: rgba(139,26,45,0.18);
+}
+
+.year-block {
+  position: relative;
+  margin-bottom: 34px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(139,26,45,0.10);
+  scroll-margin-top: 30px;
+}
+
+.year-heading {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.pub-list.compact {
+  gap: 10px;
+}
+
+.pub-list.compact .pub-item {
+  padding: 16px 18px;
+}
+
+.pub-list.compact .pub-title {
+  font-size: 0.98rem;
+}
+
+.pub-list.compact .pub-authors {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.pub-list.compact .pub-venue {
+  font-size: 0.83rem;
+}
+
+.pub-list.compact .card-actions {
+  margin-top: 12px;
+}
+    
+    /* ===== TALKS SECTION ===== */
+    .talks-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(139,26,45,0.08);
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .featured-talks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .featured-talk-card {
+      background: linear-gradient(135deg, #ffffff, #fcfafb);
+      border: 1px solid rgba(139,26,45,0.12);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .featured-talk-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .featured-talk-card .pub-title {
+      font-size: 1.02rem;
+      margin-bottom: 10px;
+    }
+
+    .featured-talk-card .pub-authors {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .featured-talk-card .pub-venue {
+      font-size: 0.86rem;
+      margin-bottom: 14px;
+    }
+
+    .talks-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 6px 0 32px;
+    }
+
+    .talks-year-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .talks-year-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(139,26,45,0.06);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .talks-year-chip:hover {
+      background: rgba(139,26,45,0.12);
+      border-color: rgba(139,26,45,0.18);
+    }
+
+    .talks-year-block {
+      position: relative;
+      margin-bottom: 34px;
+      padding-left: 18px;
+      border-left: 2px solid rgba(139,26,45,0.10);
+      scroll-margin-top: 30px;
+    }
+
+    .talks-year-heading {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .pub-list.compact-talks {
+      gap: 10px;
+    }
+
+    .pub-list.compact-talks .pub-item {
+      padding: 16px 18px;
+    }
+
+    .pub-list.compact-talks .pub-title {
+      font-size: 0.98rem;
+    }
+
+    .pub-list.compact-talks .pub-authors {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .pub-list.compact-talks .pub-venue {
+      font-size: 0.83rem;
+    }
+
+.stats-row {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:40px;
+}
+.stat-box {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px; text-align:center; transition:var(--transition);
+}
+.stat-box:hover { box-shadow:var(--shadow); }
+.stat-number {
+  font-family:'Playfair Display',serif; font-size:2rem; font-weight:700;
+  color:var(--primary); line-height:1;
+}
+.stat-label { font-size:0.85rem; color:var(--text-muted); margin-top:8px; }
+
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+.contact-info h3 { font-size:1.1rem; font-weight:600; margin-bottom:16px; color:var(--primary); }
+.contact-item {
+  display:flex; align-items:flex-start; gap:14px; margin-bottom:20px;
+}
+.contact-icon {
+  width:40px; height:40px; border-radius:10px;
+  background:rgba(139,26,45,0.06); display:flex; align-items:center; justify-content:center;
+  color:var(--primary); flex-shrink:0;
+}
+.contact-icon svg { width:20px; height:20px; }
+.contact-item div strong { display:block; font-size:0.9rem; color:var(--text); margin-bottom:2px; }
+.contact-item div span,
+.contact-item div a { font-size:0.9rem; color:var(--text-muted); text-decoration:none; }
+.contact-item div a:hover { color:var(--primary); text-decoration:underline; }
+.contact-form {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:28px;
+}
+.form-group { margin-bottom:18px; }
+.form-group label { display:block; font-size:0.85rem; font-weight:500; color:var(--text); margin-bottom:6px; }
+.form-group input,
+.form-group textarea {
+  width:100%; padding:10px 14px; border:1.5px solid var(--border);
+  border-radius:8px; font-family:inherit; font-size:0.95rem;
+  color:var(--text); background:var(--bg); transition:var(--transition);
+}
+.form-group input:focus,
+.form-group textarea:focus { outline:none; border-color:var(--primary); background:var(--surface); }
+.form-group textarea { resize:vertical; min-height:120px; }
+
+.award-box {
+  background:linear-gradient(135deg,#fefce8,#fef9c3);
+  border:1px solid #fde047; border-radius:var(--radius);
+  padding:16px 20px; margin-bottom:24px; display:flex; align-items:center; gap:12px;
+}
+.award-box svg { color:#92400e; flex-shrink:0; }
+.award-box div { font-size:0.9rem; color:#713f12; }
+.award-box div strong { color:#92400e; }
+
+footer {
+  border-top:1px solid var(--border); background:var(--surface);
+  padding:32px 24px; text-align:center; color:var(--text-muted); font-size:0.85rem;
+}
+footer a { color:var(--primary); text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+
+@media (max-width:900px) {
+  .hero { grid-template-columns:1fr; text-align:center; }
+  .hero-photo { margin:0 auto; }
+  .hero-links { justify-content:center; }
+  .stats-row { grid-template-columns:repeat(2,1fr); }
+  .contact-grid { grid-template-columns:1fr; }
+}
+@media (max-width:768px) {
+  .header-inner { height:60px; }
+  main { padding-top:84px; }
+  nav { display:none; }
+  .mobile-menu-btn { display:block; }
+  .hero-content h2 { font-size:1.7rem; }
+  .section-title { font-size:1.5rem; }
+  .cards-grid { grid-template-columns:1fr; }
+  .stats-row { grid-template-columns:repeat(2,1fr); gap:12px; }
+  .stat-box { padding:18px; }
+  .stat-number { font-size:1.6rem; }
+  .lang-toggle { margin-left:8px; margin-top:0; align-self: center; }
+  .mobile-lang { display:block !important; }
+  .lang-btn { padding: 4px 10px; font-size: 0.75rem; }
+  .selected-grid { grid-template-columns: 1fr; }
+  .year-block { padding-left: 12px; }
+  .featured-talks-grid { grid-template-columns: 1fr; }
+  .talks-year-block { padding-left: 12px; }
+  /*.lang-toggle { margin-left: 0; align-self: center; }*/
+}
+@media (max-width:480px) {
+  .hero-photo { width:150px; height:150px; }
+  .btn { padding:8px 16px; font-size:0.85rem; }
+  .card { padding:18px; }
+  .pub-item { padding:16px 18px; }
+}
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background:var(--text-muted); }
+@media print {
+  header,.mobile-menu-btn,.mobile-nav,footer,.lang-toggle { display:none !important; }
+  main { padding-top:20px; }
+  .section { display:block !important; page-break-inside:avoid; }
+  [data-lang] { display:block !important; }
+}
+</style>
+</head>
+<body class="lang-it">
+
+<header>
+<div class="header-inner">
+<a href="#bio" class="brand" onclick="showSection('bio')">
+<div class="brand-avatar">GS</div>
+<div class="brand-text">
+<h1>Gianluca Sottile</h1>
+<span data-lang="it">Università degli Studi di Palermo</span>
+<span data-lang="en">University of Palermo</span>
+</div>
+</a>
+<nav>
+<a href="#bio" class="nav-link active" data-target="bio">
+<span data-lang="it">Bio</span><span data-lang="en">Bio</span>
+</a>
+<a href="#didattica" class="nav-link" data-target="didattica">
+<span data-lang="it">Didattica</span><span data-lang="en">Teaching</span>
+</a>
+<a href="#ricerca" class="nav-link" data-target="ricerca">
+<span data-lang="it">Ricerca</span><span data-lang="en">Research</span>
+</a>
+<a href="#software" class="nav-link" data-target="software">Software</a>
+<a href="#progetti" class="nav-link" data-target="progetti">
+<span data-lang="it">Progetti</span><span data-lang="en">Projects</span>
+</a>
+<a href="#talks" class="nav-link" data-target="talks">Talks</a>
+<a href="#contatti" class="nav-link" data-target="contatti">
+<span data-lang="it">Contatti</span><span data-lang="en">Contact</span>
+</a>
+<div class="lang-toggle">
+<button class="lang-btn active" onclick="setLang('it')" aria-label="Italiano">IT</button>
+<button class="lang-btn" onclick="setLang('en')" aria-label="English">EN</button>
+</div>
+</nav>
+<button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+</button>
+</div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+<a href="#bio" class="nav-link active" data-target="bio" onclick="toggleMobileMenu()">
+<span data-lang="it">Bio</span><span data-lang="en">Bio</span>
+</a>
+<a href="#didattica" class="nav-link" data-target="didattica" onclick="toggleMobileMenu()">
+<span data-lang="it">Didattica</span><span data-lang="en">Teaching</span>
+</a>
+<a href="#ricerca" class="nav-link" data-target="ricerca" onclick="toggleMobileMenu()">
+<span data-lang="it">Ricerca</span><span data-lang="en">Research</span>
+</a>
+<a href="#software" class="nav-link" data-target="software" onclick="toggleMobileMenu()">Software</a>
+<a href="#progetti" class="nav-link" data-target="progetti" onclick="toggleMobileMenu()">
+<span data-lang="it">Progetti</span><span data-lang="en">Projects</span>
+</a>
+<a href="#talks" class="nav-link" data-target="talks" onclick="toggleMobileMenu()">Talks</a>
+<a href="#contatti" class="nav-link" data-target="contatti" onclick="toggleMobileMenu()">
+<span data-lang="it">Contatti</span><span data-lang="en">Contact</span>
+</a>
+<div class="lang-toggle">
+<button class="lang-btn active" onclick="setLang('it')" aria-label="Italiano">IT</button>
+<button class="lang-btn" onclick="setLang('en')" aria-label="English">EN</button>
+</div>
+</div>
+
+<main>
+
+<!-- ===== BIO ===== -->
+<section id="bio" class="section active">
+<div class="hero">
+<img src="https://raw.githubusercontent.com/gianluca-sottile/academic-website/master/content/authors/admin/avatar.jpg" alt="Gianluca Sottile" class="hero-photo">
+<div class="hero-content">
+<h2>Gianluca Sottile</h2>
+<div class="hero-role">
+<span data-lang="it">Professore Associato di Statistica (STAT-01/A)</span>
+<span data-lang="en">Associate Professor of Statistics (STAT-01/A)</span>
+</div>
+<div class="hero-affiliation">
+<span data-lang="it">Dipartimento di Scienze Economiche, Aziendali e Statistiche (SEAS)<br>Università degli Studi di Palermo, Italia</span>
+<span data-lang="en">Department of Economics, Business and Statistics (SEAS)<br>University of Palermo, Italy</span>
+</div>
+<p class="hero-bio">
+  <span data-lang="it">
+    Sono <strong>Professore Associato di Statistica</strong> presso il Dipartimento di Scienze Economiche, Aziendali e Statistiche dell’Università degli Studi di Palermo. La mia attività scientifica si colloca nell’ambito della <strong>statistica metodologica e computazionale</strong>, con particolare riferimento a <strong>modelli penalizzati</strong>, <strong>inferenza grafica</strong>, <strong>regressione quantilica</strong> e <strong>analisi di dati funzionali e ad alta dimensionalità</strong>. I miei interessi metodologici si accompagnano ad applicazioni interdisciplinari in ambito <strong>ambientale</strong>, <strong>biomedico</strong> e <strong>genomico</strong>. Ho conseguito il dottorato in Statistica con menzione di <em>Doctor Europaeus</em> e ho partecipato a diversi progetti di ricerca nazionali, tra cui PRIN su modelli grafici, qualità dell’aria, asma ed eventi sismici. Sono inoltre co-inventore di un <strong>brevetto italiano</strong> nell’ambito dell’autenticazione genetica dei prodotti agroalimentari. Utilizzo abitualmente <code style="background:rgba(139,26,45,0.06);padding:2px 6px;border-radius:4px;font-size:0.9em;">R</code> per ricerca, didattica e sviluppo metodologico.
+  </span>
+
+  <span data-lang="en">
+    I am an <strong>Associate Professor of Statistics</strong> at the Department of Economics, Business and Statistics, University of Palermo. My research lies in <strong>methodological and computational statistics</strong>, with a focus on <strong>penalized models</strong>, <strong>graphical inference</strong>, <strong>quantile regression</strong>, and <strong>functional and high-dimensional data analysis</strong>. These methodological interests are accompanied by interdisciplinary applications in <strong>environmental</strong>, <strong>biomedical</strong>, and <strong>genomic</strong> research. I earned my PhD in Statistics with the <em>Doctor Europaeus</em> distinction and have been involved in several national research projects, including PRIN initiatives on graphical models, air pollution, asthma, and earthquake forecasting. I am also co-inventor of an <strong>Italian patent</strong> in the field of genetic authentication of agri-food products. I regularly use <code style="background:rgba(139,26,45,0.06);padding:2px 6px;border-radius:4px;font-size:0.9em;">R</code> for research, teaching, and methodological development.
+  </span>
+</p>
+<div class="hero-links">
+
+<a href="https://www.unipa.it/persone/docenti/s/gianluca.sottile" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16v16H4z"></path>
+        <path d="M8 8h8"></path>
+        <path d="M8 12h8"></path>
+        <path d="M8 16h5"></path>
+    </svg>
+    <span data-lang="it">Pagina UniPa</span>
+    <span data-lang="en">UniPa Page</span>
+</a>
+    
+<a href="https://scholar.google.com/citations?hl=it&user=qc0KUpwAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" class="btn btn-outline">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+    </svg>
+    Google Scholar
+</a>
+
+<a href="https://orcid.org/0000-0001-9347-7251" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+    ORCID
+</a>
+
+<a href="https://www.scopus.com/authid/detail.uri?authorId=57197724197" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M8 12h8"></path>
+    <path d="M12 8v8"></path>
+  </svg>
+  Scopus
+</a>
+
+<a href="https://www.webofscience.com/wos/author/record/P-1732-2018" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M2 12h20"></path>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+  </svg>
+  Web of Science
+</a>
+
+<a href="https://github.com/gianluca-sottile" target="_blank" class="btn btn-outline">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+GitHub
+</a>
+
+</div>
+</div>
+</div>
+
+<div class="news-banner">
+<h3>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+<span data-lang="it">Ultime Notizie</span>
+<span data-lang="en">Breaking News</span>
+</h3>
+<ul>
+    <li><strong data-lang="it">Nuovo Articolo!</strong><strong data-lang="en">New Article!</strong><br>Machine learning approaches for asthma exacerbation predictions: a systematic review<br> <em>Artificial Intelligence Review</em><br>(Cilluffo G, Atzeni M, Malizia V, Vettoretti M, Sottile G)</li>
+    <li><strong data-lang="it">Nuovo Articolo!</strong><strong data-lang="en">New Article!</strong><br>Functional Gaussian Graphical Regression Models For Air Quality Data<br><em>Journal of the Royal Statistical Society Series C: Applied Statistics</em><br>(Fici R, Sottile G, Wit E &amp; Augugliaro L)</li>
+    <li><strong data-lang="it">Conferenza Futura!</strong><strong data-lang="en">Future Conference!</strong><br>18th International Conference on Statistical Analysis of Textual Data - University of Palermo, Italy, July 8–10, 2026</li>
+    <li><strong data-lang="it">Conferenza Futura!</strong><strong data-lang="en">Future Conference!</strong><br>53rd SIS and 1st FENStatS Scientific Meetings - Sapienza University of Rome, Italy, June 22–25, 2026</li>
+</ul>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:14px;">
+<span data-lang="it">Interessi di Ricerca</span>
+<span data-lang="en">Research Interests</span>
+</h3>
+<div class="tags-row">
+  <span class="tag" data-lang="it">Selezione di variabili</span>
+  <span class="tag" data-lang="en">Variable selection</span>
+
+  <span class="tag" data-lang="it">Apprendimento statistico</span>
+  <span class="tag" data-lang="en">Statistical learning</span>
+
+  <span class="tag" data-lang="it">Modelli grafici</span>
+  <span class="tag" data-lang="en">Graphical models</span>
+
+  <span class="tag" data-lang="it">Dati funzionali</span>
+  <span class="tag" data-lang="en">Functional data</span>
+
+  <span class="tag" data-lang="it">Regressione quantilica</span>
+  <span class="tag" data-lang="en">Quantile regression</span>
+
+  <span class="tag" data-lang="it">Statistica robusta</span>
+  <span class="tag" data-lang="en">Robust statistics</span>
+
+  <span class="tag" data-lang="it">Dati mancanti</span>
+  <span class="tag" data-lang="en">Missing data</span>
+
+  <span class="tag" data-lang="it">Clustering</span>
+  <span class="tag" data-lang="en">Clustering</span>
+</div>
+
+<div class="stats-row">
+<div class="stat-box"><div class="stat-number">500+</div><div class="stat-label"><span data-lang="it">Citazioni</span><span data-lang="en">Citations</span></div></div>
+<div class="stat-box"><div class="stat-number">40+</div><div class="stat-label"><span data-lang="it">Pubblicazioni</span><span data-lang="en">Publications</span></div></div>
+<div class="stat-box"><div class="stat-number">13</div><div class="stat-label"><span data-lang="it">H-index</span><span data-lang="en">H-index</span></div></div>
+<div class="stat-box"><div class="stat-number">R</div><div class="stat-label"><span data-lang="it">Linguaggio Principale</span><span data-lang="en">Primary Language</span></div></div>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:20px;">
+<span data-lang="it">Formazione</span>
+<span data-lang="en">Education</span>
+</h3>
+<div class="timeline" style="margin-bottom:40px;">
+<div class="timeline-item">
+<div class="timeline-year">2018</div>
+<div class="timeline-title">PhD in Statistics — Doctor Europaeus</div>
+<div class="timeline-desc">Università degli Studi di Palermo — <span data-lang="it">Tesi: "Penalized regression and clustering in high-dimensional data"</span><span data-lang="en">Thesis: "Penalized regression and clustering in high-dimensional data"</span></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2014</div>
+<div class="timeline-title">MSc in Statistical Sciences <em>(110/110 e lode)</em></div>
+<div class="timeline-desc">Università degli Studi di Palermo</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2012</div>
+<div class="timeline-title">BSc in Applied Mathematics</div>
+<div class="timeline-desc">Università degli Studi di Palermo</div>
+</div>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:20px;">
+<span data-lang="it">Posizioni Accademiche</span>
+<span data-lang="en">Academic Positions</span>
+</h3>
+<div class="timeline">
+    <div class="timeline-item">
+    <div class="timeline-year">Agosto 2025 — Oggi</div>
+    <div class="timeline-title"><span data-lang="it">Professore Associato</span><span data-lang="en">Associate Professor</span></div>
+    <div class="timeline-desc">DSEAS — Università degli Studi di Palermo (G.S.D. 13/STAT-01)</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">Agosto 2022 — Luglio 2025</div>
+<div class="timeline-title"><span data-lang="it">Ricercatore a Tempo Determinato (RTD-B)</span><span data-lang="en">Senior Assistant Professor</span></div>
+<div class="timeline-desc">DSEAS — Università degli Studi di Palermo (G.S.D. 13/STAT-01)</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">Luglio 2019 — Luglio 2022</div>
+<div class="timeline-title"><span data-lang="it">Ricercatore a Tempo Determinato (RTD-A)</span><span data-lang="en">Junior Assistant Professor</span></div>
+<div class="timeline-desc">DSEAS — Università degli Studi di Palermo (G.S.D. 13/STAT-04)</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">Febbraio 2018 — Febbraio 2019</div>
+<div class="timeline-title"><span data-lang="it">Assegnista di Ricerca</span><span data-lang="en">Postdoctoral Research Fellow</span></div>
+<div class="timeline-desc">DSEAS — Università degli Studi di Palermo — <span data-lang="it">Tecniche statistiche per selezione SNP nella tracciabilità di prodotti lattiero-caseari tipici siciliani (PON PROFOOD)</span><span data-lang="en">Statistical techniques for SNP selection in traceability of typical Sicilian dairy products (PON PROFOOD)</span></div>
+</div>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin:40px 0 20px;">
+<span data-lang="it">Visiting &amp; Fellowship</span>
+<span data-lang="en">Visiting &amp; Fellowships</span>
+</h3>
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-year">Gennaio — Luglio 2021</div>
+<div class="timeline-title"><span data-lang="it">Visiting Researcher</span><span data-lang="en">Visiting Researcher</span></div>
+<div class="timeline-desc">Institute of Computational Science, USI Lugano — <span data-lang="it">Collaborazione sul pacchetto R cglasso con L. Augugliaro, V. Vinciotti &amp; E.J.C. Wit</span><span data-lang="en">Collaboration on cglasso R package with L. Augugliaro, V. Vinciotti &amp; E.J.C. Wit</span></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">Febbraio 2020 — Febbraio 2021</div>
+<div class="timeline-title"><span data-lang="it">Collaboratore della Ricerca (IRIB-CNR)</span><span data-lang="en">Research Fellowship (IRIB-CNR)</span></div>
+<div class="timeline-desc">Istituto per la Ricerca e l'Innovazione Biomedica, CNR Palermo — <span data-lang="it">Studio CHASER: modellizzazione della cronicità dell'asma. Responsabile: Dr.ssa S. La Grutta</span><span data-lang="en">CHASER Study: modeling childhood asthma chronicity. Coordinator: Dr. S. La Grutta</span></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">Settembre — Dicembre 2016</div>
+<div class="timeline-title"><span data-lang="it">Visiting Researcher</span><span data-lang="en">Visiting Researcher</span></div>
+<div class="timeline-desc">The Institute of Environmental Medicine, Karolinska Institutet, Stoccolma — <span data-lang="it">Supervisore: Prof. Matteo Bottai</span><span data-lang="en">Supervisor: Prof. Matteo Bottai</span></div>
+</div>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin:40px 0 20px;">
+<span data-lang="it">Onorificenze &amp; Membresie</span>
+<span data-lang="en">Honors &amp; Memberships</span>
+</h3>
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-year">2023 — Oggi</div>
+<div class="timeline-title">Editorial Board — Scientific Reports (Nature Portfolio)</div>
+<div class="timeline-desc"><span data-lang="it">Sezione: Computational Science. IF: 3.8, 5° giornale più citato al mondo (2023)</span><span data-lang="en">Section: Computational Science. IF: 3.8, 5th most cited journal worldwide (2023)</span></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2020</div>
+<div class="timeline-title">ASN — Abilitazione Scientifica Nazionale (Seconda Fascia, 13/D1)</div>
+<div class="timeline-desc"><span data-lang="it">Valida fino al 2032</span><span data-lang="en">Valid until 2032</span></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2019</div>
+<div class="timeline-title">Società Italiana di Statistica (SIS)</div>
+<div class="timeline-desc"><span data-lang="it">Socio dal 2019 - Presente</span><span data-lang="en">Member since 2019 - Present</span></div>
+</div>
+<div class="timeline-item">
+<div class="timeline-year">2016</div>
+<div class="timeline-title">Statistical Modelling Society</div>
+<div class="timeline-desc"><span data-lang="it">Componente dal 2016 - Presente</span><span data-lang="en">Member since 2016 - Present</span></div>
+</div>
+
+</div>
+
+<div class="award-box">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+<div><strong>Best Poster Award (3rd prize)</strong> — SIS 2025, Genova. "Time Series Bootstrap for Renewable Energy Analysis in Power Grid Optimization" (G. Marcon, A. Marletta, S. Moradi, G. Zizzo, S. Favuzza &amp; G. Sottile)</div>
+</div>
+
+<div class="award-box" style="background:linear-gradient(135deg,#fee2e2,#fecaca);border-color:#fca5a5;">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+<div><strong data-lang="it">Brevetto Italiano</strong><strong data-lang="en">Italian Patent</strong> n. 102016000104381 (2016) — <span data-lang="it">"Metodo per l'autenticazione di prodotti alimentari lattiero-caseari mediante analisi di polimorfismi a singolo nucleotide"</span><span data-lang="en">"Method for authentication of dairy products through single nucleotide polymorphism analysis"</span> (M. Chiodi, R. Di Gerlando, S. Mastrangelo, B. Portolano, M.T. Sardina, G. Sottile, M. Tolone)</div>
+</div>
+</section>
+
+<!-- ===== DIDATTICA ===== -->
+<section id="didattica" class="section">
+<h2 class="section-title">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+<span data-lang="it">Didattica</span>
+<span data-lang="en">Teaching</span>
+</h2>
+<p class="section-subtitle">
+<span data-lang="it">Attività didattiche presso l'Università degli Studi di Palermo</span>
+<span data-lang="en">Teaching activities at the University of Palermo</span>
+</p>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:16px;">
+<span data-lang="it">Corsi Attuali</span>
+<span data-lang="en">Current Courses</span>
+</h3>
+<div class="cards-grid" style="margin-bottom:40px;">
+<div class="card">
+<div class="card-header">
+    <span class="card-tag tag-course">Second Level Master</span>
+    <span class="card-tag tag-year">2.5 CFU (20h)</span>
+    </div>
+    <h3>Introduzione al Machine Learning</h3>
+    <p><span data-lang="it">Master Universitario di Secondo Livello in Data Science per le Amministrazioni Pubbliche e Private — SEAS, UniPa.</span><span data-lang="en">Second Level Master Data Science for Public and Private Administrations — SEAS, UniPa.</span></p>
+    <div class="card-meta">
+    <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Jan 2026 — Present</span>
+    </div>
+    <div class="card-actions">
+    <a href="https://www.unipa.it/servizi/masterecorsidiperfezionamento/.content/documenti/2025_2026/S.I.-Adelfio.pdf" target="_blank" class="btn btn-primary btn-sm">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+    <span data-lang="it">Scheda Informativa</span>
+    <span data-lang="en">Information Sheet</span>
+    </a>
+    <a href="https://sites.google.com/community.unipa.it/master-data-science/home-page" target="_blank" class="btn btn-outline btn-sm">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 22V12h6v10"></path>
+        <path d="M2 10.5 12 2l10 8.5"></path>
+        <path d="M4 9.5V20a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5"></path>
+      </svg>
+      <span data-lang="it">Homepage</span>
+      <span data-lang="en">Homepage</span>
+    </a>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<span class="card-tag tag-course">Master</span>
+<span class="card-tag tag-year">6 CFU</span>
+</div>
+<h3>Statistical Machine Learning</h3>
+<p><span data-lang="it">Corso di Laurea Magistrale in Statistica e Data Science (LM82/LMData) — SEAS, UniPa.</span><span data-lang="en">Master Degree in Statistics and Data Science (LM82/LMData) — SEAS, UniPa.</span></p>
+<div class="card-meta">
+<span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Sep 2024 — Present</span>
+</div>
+<div class="card-actions">
+<a href="https://offertaformativa.unipa.it/offweb/schedaTrasparenza?lingua=ITA&oidCurrInsegnamento=203436" target="_blank" class="btn btn-primary btn-sm">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+<span data-lang="it">Scheda Trasparenza</span>
+<span data-lang="en">Transparency Sheet</span>
+</a>
+<a href="https://www.dropbox.com/scl/fo/tjud4hqc0iucqtq977hww/AIhiStbQhWKRQCTyq4XfbDo?rlkey=dw1rsrqvtoh8eewthko3qssph&e=1&st=muvlnild&dl=0" target="_blank" class="btn btn-outline btn-sm">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+<span data-lang="it">Materiale Didattico</span>
+<span data-lang="en">Course Materials</span>
+</a>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<span class="card-tag tag-course">Bachelor</span>
+<span class="card-tag tag-year">8 CFU</span>
+</div>
+<h3><span data-lang="it">Statistica</span><span data-lang="en">Statistics</span></h3>
+<p><span data-lang="it">Corso di Laurea Triennale in Economia e Amministrazione Aziendale (L18) — SEAS, UniPa.</span><span data-lang="en">BSc course in Economics and Business Administration (L18) — SEAS, UniPa.</span></p>
+<div class="card-meta">
+<span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Sep 2025 — Present</span>
+</div>
+<div class="card-actions">
+<a href="https://offertaformativa.unipa.it/offweb/schedaTrasparenza?lingua=ITA&oidCurrInsegnamento=198678" target="_blank" class="btn btn-primary btn-sm">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+<span data-lang="it">Scheda Trasparenza</span>
+<span data-lang="en">Transparency Sheet</span>
+</a>
+<a href="https://www.dropbox.com/scl/fo/eks4ly7qmevzhyqitzpjk/AF4fiFGwsxfH6Bzjhv4YBc4?rlkey=iyus77gzw8cak7hh2ynzsr92x&st=6fhxxqo2&dl=0" target="_blank" class="btn btn-outline btn-sm">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+<span data-lang="it">Materiale Didattico</span>
+<span data-lang="en">Course Materials</span>
+</a>
+</div>
+</div>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:16px;">
+<span data-lang="it">Corsi Passati</span>
+<span data-lang="en">Past Courses</span>
+</h3>
+<div class="cards-grid" style="margin-bottom:40px;">
+    <div class="card">
+    <div class="card-header"><span class="card-tag tag-course">Bachelor</span><span class="card-tag tag-year">9 CFU</span></div>
+    <h3><span data-lang="it">Statistica</span><span data-lang="en">Statistics</span></h3>
+    <p><span data-lang="it">Corso di Laurea Triennale in Ingegneria Informatica (L8) — Ingegneria, UniPa.</span><span data-lang="en">Master Degree in Statistics and Data Science (L8) — Engineering, UniPa.</span></p>
+    <div class="card-meta"><span>Sep 2023 — Jul 2024</span></div>
+    </div>
+    <div class="card">
+    <div class="card-header"><span class="card-tag tag-course">Master</span><span class="card-tag tag-year">6 CFU</span></div>
+    <h3>Optimization for Statistical and Machine Learning</h3>
+    <p><span data-lang="it">Corso di Laurea Magistrale in Statistica e Data Science (LM82) — SEAS, UniPa.</span><span data-lang="en">Master Degree in Statistics and Data Science (LM82) — SEAS, UniPa.</span></p>
+    <div class="card-meta"><span>Sep 2023 — Jul 2024</span></div>
+    </div>
+    <div class="card">
+    <div class="card-header"><span class="card-tag tag-course">Master</span><span class="card-tag tag-year">3 CFU</span></div>
+    <h3><span data-lang="it">Laboratorio di Mercati Finanziari</span><span data-lang="en">Financial Markets Laboratory</span></h3>
+    <p><span data-lang="it">Corso di Laurea Magistrale in Statistica e Data Science (LM82) — SEAS, UniPa.</span><span data-lang="en">Master Degree in Statistics and Data Science (LM82) — SEAS, UniPa.</span></p>
+    <div class="card-meta"><span>Sep 2021 — Jul 2024</span></div>
+    </div>
+    <div class="card">
+    <div class="card-header"><span class="card-tag tag-course">Bachelor</span><span class="card-tag tag-year">6 CFU</span></div>
+    <h3><span data-lang="it">Statistica</span><span data-lang="en">Statistics</span></h3>
+    <p><span data-lang="it">Corso di Laurea Triennale in Disegno Industriale (L4) — Architettura, UniPa.</span><span data-lang="en">BSc course in Industrial Design (L4) — Architecture, UniPa.</span></p>
+    <div class="card-meta"><span>Mar 2019 — Feb 2020</span></div>
+    </div>
+    <div class="card">
+    <div class="card-header"><span class="card-tag tag-course">Bachelor</span><span class="card-tag tag-year">6 CFU</span></div>
+    <h3><span data-lang="it">Statistica</span><span data-lang="en">Statistics</span></h3>
+    <p><span data-lang="it">Corso di Laurea Triennale in Biologia/Scienze Naturali (LM6/LM60) — Scienze della Terra e del Mare, UniPa.</span><span data-lang="en">BSc course in Biology/Natural Sciences (LM6/LM60) — Earth and Marine Sciences, UniPa.</span></p>
+    <div class="card-meta"><span>Mar 2018 — Feb 2019</span></div>
+    </div>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:16px;">
+<span data-lang="it">Didattica Dottorato</span>
+<span data-lang="en">PhD Teaching</span>
+</h3>
+<div class="cards-grid">
+<div class="card">
+<div class="card-header"><span class="card-tag tag-phd">PhD Course</span><span class="card-tag tag-year">3 CFU</span></div>
+<h3>Statistical Machine Learning</h3>
+<p>PhD in Economics, Business and Statistics — SEAS, UniPa. January 2025 (15 hours).</p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-phd">PhD Course</span><span class="card-tag tag-year">2 CFU</span></div>
+<h3>An R Tutorial for Beginners</h3>
+<p>PhD program — UniPa. January–June 2020 (10 hours). <span data-lang="it">Tutorial interattivo con esercizi e dataset.</span><span data-lang="en">Interactive tutorial with exercises and datasets.</span></p>
+<div class="card-actions">
+<a href="https://gianluca-sottile.github.io/An-R-Tutorial-for-Beginners/" target="_blank" class="btn btn-primary btn-sm">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+<span data-lang="it">Accedi al Tutorial</span>
+<span data-lang="en">Access Tutorial</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== RICERCA ===== -->
+<section id="ricerca" class="section">
+  <h2 class="section-title">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="2" y1="12" x2="22" y2="12"></line>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+    <span data-lang="it">Ricerca</span>
+    <span data-lang="en">Research</span>
+  </h2>
+
+  <p class="section-subtitle">
+    <span data-lang="it">Pubblicazioni selezionate e produzione scientifica organizzata per anno</span>
+    <span data-lang="en">Selected publications and scientific output organized by year</span>
+  </p>
+
+  <div class="research-pill">
+    <span data-lang="it">Articoli selezionati</span>
+    <span data-lang="en">Selected papers</span>
+  </div>
+
+  <div class="selected-grid">
+    <div class="selected-card">
+      <div class="pub-title">Machine learning approaches for asthma exacerbation predictions: a systematic review</div>
+      <div class="pub-authors">Cilluffo, Giovanna; Atzeni, Michele; Malizia, Velia; Vettoretti, Martina; Sottile, Gianluca</div>
+      <div class="pub-venue">Artificial Intelligence Review, 59(4)</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1007/s10462-026-11536-3" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">Functional Gaussian graphical regression models for air quality data</div>
+      <div class="pub-authors">Fici, Rita; Sottile, Gianluca; Augugliaro, Luigi; Wit, Ernst C.</div>
+      <div class="pub-venue">Journal of the Royal Statistical Society. Series C: Applied Statistics, 75(1), 225–246</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1093/jrsssc/qlaf042" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">Sparse inference of the human haematopoietic system from heterogeneous and partially observed genomic data</div>
+      <div class="pub-authors">Sottile, Gianluca; Augugliaro, Luigi; Vinciotti, Veronica; Arancio, Walter; Coronnello, Claudia</div>
+      <div class="pub-venue">Journal of the Royal Statistical Society. Series C: Applied Statistics, 74(1), 204–228</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1093/jrsssc/qlae052" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">A comprehensive environmental exposure indicator and respiratory health in asthmatic children: a case study</div>
+      <div class="pub-authors">Cilluffo, Giovanna; Sottile, Gianluca; Ferrante, Giuliana; Fasola, Salvatore; Malizia, Velia; Montalbano, Laura; Ranzi, Andrea; Badaloni, Chiara; Viegi, Giovanni; La Grutta, Stefania</div>
+      <div class="pub-venue">Environmental and Ecological Statistics, 31(2), 297–315</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1007/s10651-024-00610-0" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">Parametric estimation of non-crossing quantile functions</div>
+      <div class="pub-authors">Sottile, Gianluca; Frumento, Paolo</div>
+      <div class="pub-venue">Statistical Modelling, 23(2), 173–195</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1177/1471082X211036517" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">cglasso: An R Package for Conditional Graphical Lasso Inference with Censored and Missing Values</div>
+      <div class="pub-authors">Augugliaro, Luigi; Sottile, Gianluca; Wit, Ernst C.; Vinciotti, Veronica</div>
+      <div class="pub-venue">Journal of Statistical Software, 105(1), 1–58</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.18637/jss.v105.i01" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">Joint modelling of non-crossing additive quantile regression via constrained B-spline varying coefficients</div>
+      <div class="pub-authors">Muggeo, Vito M.R.; Sottile, Gianluca; Cilluffo, Giovanna</div>
+      <div class="pub-venue">Statistical Modelling, 23(5-6), 540–554</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1177/1471082X231181734" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">A PCA-based clustering algorithm for the identification of stratiform and convective precipitation at the event scale: an application to the sub-hourly precipitation of Sicily, Italy</div>
+      <div class="pub-authors">Sottile, Gianluca; Francipane, Antonio; Adelfio, Giada; Noto, Leonardo V.</div>
+      <div class="pub-venue">Stochastic Environmental Research and Risk Assessment, 36(8), 2303–2317</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1007/s00477-021-02028-7" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">Robust estimation and regression with parametric quantile functions</div>
+      <div class="pub-authors">Sottile, Gianluca; Frumento, Paolo</div>
+      <div class="pub-venue">Computational Statistics and Data Analysis, 171</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1016/j.csda.2022.107471" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">A penalized approach to covariate selection through quantile regression coefficient models</div>
+      <div class="pub-authors">Sottile, Gianluca; Frumento, Paolo; Chiodi, Marcello; Bottai, Matteo</div>
+      <div class="pub-venue">Statistical Modelling, 20(4), 369–385</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1177/1471082X19825523" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">The Induced Smoothed lasso: A practical framework for hypothesis testing in high dimensional regression</div>
+      <div class="pub-authors">Cilluffo, Giovanna; Sottile, Gianluca; La Grutta, Stefania; Muggeo, Vito MR</div>
+      <div class="pub-venue">Statistical Methods in Medical Research, 29(3), 765–777</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1177/0962280219842890" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">The conditional censored graphical lasso estimator</div>
+      <div class="pub-authors">Augugliaro, Luigi; Sottile, Gianluca; Vinciotti, Veronica</div>
+      <div class="pub-venue">Statistics and Computing, 30(5), 1273–1289</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+        <span class="badge badge-open">Open Access</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1007/s11222-020-09945-7" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+
+    <div class="selected-card">
+      <div class="pub-title">Clusters of effects curves in quantile regression models</div>
+      <div class="pub-authors">Sottile, Gianluca; Adelfio, Giada</div>
+      <div class="pub-venue">Computational Statistics, 34(2), 551–569</div>
+      <div class="pub-badges">
+        <span class="badge badge-journal">Journal</span>
+      </div>
+      <div class="card-actions">
+        <a href="https://doi.org/10.1007/s00180-018-0817-8" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="research-divider"></div>
+
+  <div class="research-pill">
+    <span data-lang="it">Pubblicazioni per anno</span>
+    <span data-lang="en">Publications by year</span>
+  </div>
+
+  <div class="year-index">
+    <a href="#pub-2026" class="year-chip">2026</a>
+    <a href="#pub-2025" class="year-chip">2025</a>
+    <a href="#pub-2024" class="year-chip">2024</a>
+    <a href="#pub-2023" class="year-chip">2023</a>
+    <a href="#pub-2022" class="year-chip">2022</a>
+    <a href="#pub-2021" class="year-chip">2021</a>
+    <a href="#pub-2020" class="year-chip">2020</a>
+    <a href="#pub-2019" class="year-chip">2019</a>
+    <a href="#pub-2018" class="year-chip">2018</a>
+    <a href="#pub-2017" class="year-chip">2017</a>
+  </div>
+
+  <div class="year-block" id="pub-2026">
+    <div class="year-heading">2026</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">Functional Gaussian graphical regression models for air quality data</div>
+        <div class="pub-authors">Fici, Rita; Sottile, Gianluca; Augugliaro, Luigi; Wit, Ernst C.</div>
+        <div class="pub-venue">Journal of the Royal Statistical Society. Series C: Applied Statistics, 75(1), 225–246</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1093/jrsssc/qlaf042" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Machine learning approaches for asthma exacerbation predictions: a systematic review</div>
+        <div class="pub-authors">Cilluffo, Giovanna; Atzeni, Michele; Malizia, Velia; Vettoretti, Martina; Sottile, Gianluca</div>
+        <div class="pub-venue">Artificial Intelligence Review, 59(4)</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1007/s10462-026-11536-3" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2025">
+    <div class="year-heading">2025</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">Sparse inference of the human haematopoietic system from heterogeneous and partially observed genomic data</div>
+        <div class="pub-authors">Sottile, Gianluca; Augugliaro, Luigi; Vinciotti, Veronica; Arancio, Walter; Coronnello, Claudia</div>
+        <div class="pub-venue">Journal of the Royal Statistical Society. Series C: Applied Statistics, 74(1), 204–228</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1093/jrsssc/qlae052" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2024">
+    <div class="year-heading">2024</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">A comprehensive environmental exposure indicator and respiratory health in asthmatic children: a case study</div>
+        <div class="pub-authors">Cilluffo, Giovanna; Sottile, Gianluca; Ferrante, Giuliana; Fasola, Salvatore; Malizia, Velia; Montalbano, Laura; Ranzi, Andrea; Badaloni, Chiara; Viegi, Giovanni; La Grutta, Stefania</div>
+        <div class="pub-venue">Environmental and Ecological Statistics, 31(2), 297–315</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1007/s10651-024-00610-0" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Influence of season and photoperiod in severe dog attack cases on humans in a Mediterranean climate region</div>
+        <div class="pub-authors">Alberghina, Daniela; Sottile, Gianluca; Virga, Antonino Nazareno; Brancato, Giacoma; Panzera, Michele</div>
+        <div class="pub-venue">Journal of Veterinary Behavior, 73, 46–50</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1016/j.jveb.2024.03.006" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A high-density genome-wide approach reveals novel genetic markers linked to small ruminant lentivirus susceptibility in sheep</div>
+        <div class="pub-authors">Riggio, Silvia; Tolone, Marco; Sottile, Gianluca; Tumino, Serena; Portolano, Baldassare; Sutera, Anna Maria; Sardina, Maria Teresa; Cesarani, Alberto; Mastrangelo, Salvatore</div>
+        <div class="pub-venue">Frontiers in Genetics, 15</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.3389/fgene.2024.1376883" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2023">
+    <div class="year-heading">2023</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">A 10-year retrospective analysis (2012-2021) of hospitalizations resulting from dog bites in Southern Italy</div>
+        <div class="pub-authors">Alberghina, Daniela; Virga, Antonino; Sottile, Gianluca; Buffa, Sergio Pio; Panzera, Michele</div>
+        <div class="pub-venue">Frontiers in Veterinary Science, 10</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.3389/fvets.2023.1104477" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">cglasso: An R Package for Conditional Graphical Lasso Inference with Censored and Missing Values</div>
+        <div class="pub-authors">Augugliaro, Luigi; Sottile, Gianluca; Wit, Ernst C.; Vinciotti, Veronica</div>
+        <div class="pub-venue">Journal of Statistical Software, 105(1), 1–58</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.18637/jss.v105.i01" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Analyzing post modern consumer behavior and beef consumption patterns: Insights from Sicilian market</div>
+        <div class="pub-authors">Modica, Federico; Sciortino, Caterina; Bonanno, Adriana; Virga, Nazareno Antonino; Sciortino, Natalia; Sottile, Gianluca; Sgroi, Filippo</div>
+        <div class="pub-venue">Future Foods, 8</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1016/j.fufo.2023.100263" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Parametric estimation of non-crossing quantile functions</div>
+        <div class="pub-authors">Sottile, Gianluca; Frumento, Paolo</div>
+        <div class="pub-venue">Statistical Modelling, 23(2), 173–195</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1177/1471082X211036517" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Joint modelling of non-crossing additive quantile regression via constrained B-spline varying coefficients</div>
+        <div class="pub-authors">Muggeo, Vito M.R.; Sottile, Gianluca; Cilluffo, Giovanna</div>
+        <div class="pub-venue">Statistical Modelling, 23(5-6), 540–554</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1177/1471082X231181734" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2022">
+    <div class="year-heading">2022</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">Robust estimation and regression with parametric quantile functions</div>
+        <div class="pub-authors">Sottile, Gianluca; Frumento, Paolo</div>
+        <div class="pub-venue">Computational Statistics and Data Analysis, 171</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1016/j.csda.2022.107471" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">The neglected status of the vermetid reefs in the Mediterranean Sea: A systematic map</div>
+        <div class="pub-authors">Picone, Flavio; Sottile, Gianluca; Fazio, Concetta; Chemello, Renato</div>
+        <div class="pub-venue">Ecological Indicators, 143</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1016/j.ecolind.2022.109358" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A multivariate statistical test for differential expression analysis</div>
+        <div class="pub-authors">Tumminello, Michele; Bertolazzi, Giorgio; Sottile, Gianluca; Sciaraffa, Nicolina; Arancio, Walter; Coronnello, Claudia</div>
+        <div class="pub-venue">Scientific Reports, 12(1)</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1038/s41598-022-12246-w" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A PCA-based clustering algorithm for the identification of stratiform and convective precipitation at the event scale: an application to the sub-hourly precipitation of Sicily, Italy</div>
+        <div class="pub-authors">Sottile, Gianluca; Francipane, Antonio; Adelfio, Giada; Noto, Leonardo V.</div>
+        <div class="pub-venue">Stochastic Environmental Research and Risk Assessment, 36(8), 2303–2317</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1007/s00477-021-02028-7" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Migration and students' performance: detecting geographical differences following a curves clustering approach</div>
+        <div class="pub-authors">Boscaino, Giovanni; Sottile, Gianluca; Adelfio, Giada</div>
+        <div class="pub-venue">Journal of Applied Statistics, 49(4), 1018–1032</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1080/02664763.2020.1845624" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2021">
+    <div class="year-heading">2021</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">Activation-Induced Rigidity in Neurologically and Cognitively Healthy Individuals Aged 18-90 Years: A Cross-Sectional Study</div>
+        <div class="pub-authors">Camarda, Cecilia; Torelli, Paola; Pipia, Carmela; Battaglini, Iacopo; Sottile, Gianluca; Cilluffo, Giovanna; Camarda, Rosolino</div>
+        <div class="pub-venue">Journal of Parkinson's Disease, 11(2), 847–856</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.3233/JPD-202488" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A model-based approach for assessing bronchodilator responsiveness in children: The conventional cutoff revisited</div>
+        <div class="pub-authors">Sottile, Gianluca; Ferrante, Giuliana; Cilluffo, Giovanna; Fasola, Salvatore; Malizia, Velia; Muggeo, Vito M.R.; Viegi, Giovanni; La Grutta, Stefania</div>
+        <div class="pub-venue">Journal of Allergy and Clinical Immunology, 147(2), 769–772.e10</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1016/j.jaci.2020.07.029" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2020">
+    <div class="year-heading">2020</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">Isolated, Subtle Neurological Abnormalities in Mild Cognitive Impairment Types</div>
+        <div class="pub-authors">Camarda, Cecilia; Camarda, Rosolino; Pipia, Carmela; Azzarello, Delia; Grassedonio, Emanuele; Sottile, Gianluca; Cilluffo, Giovanna; Torelli, Paola</div>
+        <div class="pub-venue">Canadian Journal of Neurological Sciences, 47(1), 77–91</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1017/cjn.2019.293" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">The conditional censored graphical lasso estimator</div>
+        <div class="pub-authors">Augugliaro, Luigi; Sottile, Gianluca; Vinciotti, Veronica</div>
+        <div class="pub-venue">Statistics and Computing, 30(5), 1273–1289</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1007/s11222-020-09945-7" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Apoe genotypes and brain imaging classes in normal cognition, mild cognitive impairment, and alzheimer’s disease: A longitudinal study</div>
+        <div class="pub-authors">Camarda, Cecilia; Torelli, Paola; Pipia, Carmela; Sottile, Gianluca; Cilluffo, Giovanna; Camarda, Rosolino</div>
+        <div class="pub-venue">Current Alzheimer Research, 17(8), 766–780</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.2174/1567205017666201109093314" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Genome-wide detection of signatures of selection in three Valdostana cattle populations</div>
+        <div class="pub-authors">Mastrangelo, Salvatore; Ben Jemaa, Slim; Ciani, Elena; Sottile, Gianluca; Moscarelli, Angelo; Boussaha, Mekki; Montedoro, Marina; Pilla, Fabio; Cassandro, Martino</div>
+        <div class="pub-venue">Journal of Animal Breeding and Genetics, 137(6), 609–621</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1111/jbg.12476" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Refining the genetic structure and relationships of European cattle breeds through meta-analysis of worldwide genomic SNP data, focusing on Italian cattle</div>
+        <div class="pub-authors">Mastrangelo, Salvatore; Tolone, Marco; Ben Jemaa, Slim; Sottile, Gianluca; Di Gerlando, Rosalia; Cortés, Oscar; Senczuk, Gabriele; Portolano, Baldassare; Pilla, Fabio; Ciani, Elena</div>
+        <div class="pub-venue">Scientific Reports, 10(1)</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1038/s41598-020-71375-2" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Genome-wide analyses identifies known and new markers responsible of chicken plumage color</div>
+        <div class="pub-authors">Mastrangelo, Salvatore; Cendron, Filippo; Sottile, Gianluca; Niero, Giovanni; Portolano, Baldassare; Biscarini, Filippo; Cassandro, Martino</div>
+        <div class="pub-venue">Animals, 10(3)</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.3390/ani10030493" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Genome-wide analyses reveal the regions involved in the phenotypic diversity in Sicilian pigs</div>
+        <div class="pub-authors">D’Alessandro, E.; Sottile, G.; Sardina, M.T.; Criscione, A.; Bordonaro, S.; Sutera, A.M.; Zumbo, A.; Portolano, B.; Mastrangelo, S.</div>
+        <div class="pub-venue">Animal Genetics, 51(1), 101–105</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1111/age.12887" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A penalized approach to covariate selection through quantile regression coefficient models</div>
+        <div class="pub-authors">Sottile, Gianluca; Frumento, Paolo; Chiodi, Marcello; Bottai, Matteo</div>
+        <div class="pub-venue">Statistical Modelling, 20(4), 369–385</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1177/1471082X19825523" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">The Induced Smoothed lasso: A practical framework for hypothesis testing in high dimensional regression</div>
+        <div class="pub-authors">Cilluffo, Giovanna; Sottile, Gianluca; La Grutta, Stefania; Muggeo, Vito MR</div>
+        <div class="pub-venue">Statistical Methods in Medical Research, 29(3), 765–777</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1177/0962280219842890" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2019">
+    <div class="year-heading">2019</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">Nociceptive Primitive Reflexes in Neurologically and Cognitively Healthy Aging Subjects</div>
+        <div class="pub-authors">Camarda, Cecilia; Torelli, Paola; Pipia, Carmela; Azzarello, Delia; Battaglini, Iacopo; Sottile, Gianluca; Cilluffo, Giovanna; Camarda, Rosolino</div>
+        <div class="pub-venue">Canadian Journal of Neurological Sciences, 46(2), 199–208</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1017/cjn.2018.388" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A combined genome-wide approach identifies a new potential candidate marker associated with the coat color sidedness in cattle</div>
+        <div class="pub-authors">Mastrangelo, Salvatore; Sottile, Gianluca; Sardina, Maria Teresa; Sutera, Anna Maria; Tolone, Marco; Di Gerlando, Rosalia; Portolano, Baldassare</div>
+        <div class="pub-venue">Livestock Science, 225, 91–95</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1016/j.livsci.2019.05.009" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">An association analysis to identify genetic variants linked to asthma and rhino-conjunctivitis in a cohort of Sicilian children</div>
+        <div class="pub-authors">Sottile, Gianluca; Ferrante, Giuliana; Torregrossa, Marta; Cibella, Fabio; Cilluffo, Giovanna; Fasola, Salvatore; Alessandro, Riccardo; Seidita, Gregorio; Viegi, Giovanni; La Grutta, Stefania</div>
+        <div class="pub-venue">Italian Journal of Pediatrics, 45(1)</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1186/s13052-019-0603-4" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Combined approaches to identify genomic regions involved in phenotypic differentiation between low divergent breeds: Application in Sardinian sheep populations</div>
+        <div class="pub-authors">Mastrangelo, Salvatore; Ben Jemaa, Slim; Sottile, Gianluca; Casu, Sara; Portolano, Baldassare; Ciani, Elena; Pilla, Fabio</div>
+        <div class="pub-venue">Journal of Animal Breeding and Genetics, 136(6), 526–534</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1111/jbg.12422" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Mild Parkinsonian signs in a hospital-based cohort of mild cognitive impairment types: A cross-sectional study</div>
+        <div class="pub-authors">Camarda, Cecilia; Torelli, Paola; Pipia, Carmela; Battaglini, Iacopo; Azzarello, Delia; Rosano, Rosamaria; Ventimiglia, Caterina Claudia; Sottile, Gianluca; Cilluffo, Giovanna; Camarda, Rosolino</div>
+        <div class="pub-venue">Current Alzheimer Research, 16(7), 633–649</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.2174/1567205016666190726100744" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Clusters of effects curves in quantile regression models</div>
+        <div class="pub-authors">Sottile, Gianluca; Adelfio, Giada</div>
+        <div class="pub-venue">Computational Statistics, 34(2), 551–569</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1007/s00180-018-0817-8" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Genome-wide analysis identifies potentially causative genes explaining the phenotypic variability in Pinzirita sheep</div>
+        <div class="pub-authors">Mastrangelo, Salvatore; Criscione, Andrea; Sottile, Gianluca; Portolano, Baldassare; Marletta, Donata; Bordonaro, Salvatore</div>
+        <div class="pub-venue">Animal Genetics, 50(2), 189–190</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1111/age.12763" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Genome-wide association study between CNVs and milk production traits in Valle del Belice sheep</div>
+        <div class="pub-authors">Di Gerlando, Rosalia; Sutera, Anna Maria; Mastrangelo, Salvatore; Tolone, Marco; Portolano, Baldassare; Sottile, Gianluca; Bagnato, Alessandro; Strillacci, Maria Giuseppina; Sardina, Maria Teresa</div>
+        <div class="pub-venue">PLoS ONE, 14(4)</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1371/journal.pone.0215204" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2018">
+    <div class="year-heading">2018</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">Penalized classification for optimal statistical selection of markers from high-throughput genotyping: Application in sheep breeds</div>
+        <div class="pub-authors">Sottile, G.; Sardina, M.T.; Mastrangelo, S.; Di Gerlando, R.; Tolone, M.; Chiodi, M.; Portolano, B.</div>
+        <div class="pub-venue">Animal, 12(6), 1118–1125</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1017/S175173111700266X" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Runs of homozygosity reveal genome-wide autozygosity in Italian sheep breeds</div>
+        <div class="pub-authors">Mastrangelo, S.; Ciani, E.; Sardina, M.T.; Sottile, G.; Pilla, F.; Portolano, B.</div>
+        <div class="pub-venue">Animal Genetics, 49(1), 71–81</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1111/age.12634" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Association between atrophy of the caudate nuclei, global brain atrophy, cerebral small vessel disease and mild parkinsonian signs in neurologically and cognitively healthy subjects aged 45-84 years: A cross-sectional study</div>
+        <div class="pub-authors">Camarda, Cecilia; Torelli, Paola; Pipia, Carmela; Battaglini, Iacopo; Azzarello, Delia; Rosano, Rosamaria; Ventimiglia, Giusi Daniela; Sottile, Gianluca; Cilluffo, Giovanna; Camarda, Rosolino</div>
+        <div class="pub-venue">Current Alzheimer Research, 15(11), 1013–1026</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.2174/1567205015666180702111110" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Genome-wide association study reveals the locus responsible for microtia in Valle del Belice sheep breed</div>
+        <div class="pub-authors">Mastrangelo, S.; Sottile, G.; Sutera, A.M.; Di Gerlando, R.; Tolone, M.; Moscarelli, A.; Sardina, M.T.; Portolano, B.</div>
+        <div class="pub-venue">Animal Genetics, 49(6), 636–640</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1111/age.12719" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="year-block" id="pub-2017">
+    <div class="year-heading">2017</div>
+    <div class="pub-list compact">
+      <div class="pub-item">
+        <div class="pub-title">Genome-wide scan for runs of homozygosity identifies potential candidate genes associated with local adaptation in Valle del Belice sheep</div>
+        <div class="pub-authors">Mastrangelo, Salvatore; Tolone, Marco; Sardina, Maria T.; Sottile, Gianluca; Sutera, Anna M.; Di Gerlando, Rosalia; Portolano, Baldassare</div>
+        <div class="pub-venue">Genetics Selection Evolution, 49(1)</div>
+        <div class="pub-badges">
+          <span class="badge badge-journal">Journal</span>
+          <span class="badge badge-open">Open Access</span>
+        </div>
+        <div class="card-actions">
+          <a href="https://doi.org/10.1186/s12711-017-0360-z" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOFTWARE ===== -->
+<section id="software" class="section">
+<h2 class="section-title">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+Software
+</h2>
+<p class="section-subtitle">
+<span data-lang="it">Pacchetti R disponibili su CRAN o GitHub</span>
+<span data-lang="en">R packages available on CRAN or GitHub</span>
+</p>
+
+<div class="cards-grid">
+<div class="card">
+<div class="card-header"><span class="card-tag tag-software">CRAN</span><span class="card-tag tag-year">R Package</span></div>
+<h3>islasso</h3>
+<p><span data-lang="it">The Induced Smoothed Lasso. Selezione di variabili tramite smoothing indotto della penalità Lasso, con stima degli errori standard e test d'ipotesi.</span><span data-lang="en">The Induced Smoothed Lasso. Variable selection via induced smoothing of the Lasso penalty, with standard error estimation and hypothesis testing.</span></p>
+<div class="card-actions">
+<a href="https://cran.r-project.org/package=islasso" target="_blank" class="btn btn-primary btn-sm">CRAN</a>
+<a href="https://journals.sagepub.com/doi/10.1177/0962280219842890" class="btn btn-outline btn-sm">Paper</a>
+<a href="https://github.com/gianluca-sottile/islasso" target="_blank" class="btn btn-outline btn-sm">GitHub</a>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-software">CRAN</span><span class="card-tag tag-year">R Package</span></div>
+<h3>Qest</h3>
+<p><span data-lang="it">Quantile-Based Estimator. Metodi di stima basati sui quantili per la modellistica statistica robusta e la regressione quantilica.</span><span data-lang="en">Quantile-Based Estimator. Quantile-based estimation methods for robust statistical modeling and quantile regression frameworks.</span></p>
+<div class="card-actions">
+<a href="https://cran.r-project.org/package=Qest" target="_blank" class="btn btn-primary btn-sm">CRAN</a>
+<a href="https://www.sciencedirect.com/science/article/abs/pii/S0167947322000512" class="btn btn-outline btn-sm">Paper</a>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-software">CRAN</span><span class="card-tag tag-year">R Package</span></div>
+<h3>qrcmNP</h3>
+<p><span data-lang="it">Nonlinear and Penalized Quantile Regression Coefficients Modeling. Estende la regressione quantilica con modellizzazione non lineare e penalizzata dei coefficienti.</span><span data-lang="en">Nonlinear and Penalized Quantile Regression Coefficients Modeling. Extends quantile regression with nonlinear and penalized coefficient modeling.</span></p>
+<div class="card-actions">
+<a href="https://cran.r-project.org/package=qrcmNP" target="_blank" class="btn btn-primary btn-sm">CRAN</a>
+<a href="https://journals.sagepub.com/doi/10.1177/1471082X19825523" class="btn btn-outline btn-sm">Paper</a>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-software">CRAN</span><span class="card-tag tag-year">R Package</span></div>
+<h3>clustEff</h3>
+<p><span data-lang="it">Clusters of Effects Curves in Quantile Regression Models. Strumenti per il clustering e la visualizzazione delle curve di effetto nella regressione quantilica.</span><span data-lang="en">Clusters of Effects Curves in Quantile Regression Models. Tools for clustering and visualizing effect curves in quantile regression analysis.</span></p>
+<div class="card-actions">
+<a href="https://cran.r-project.org/package=clustEff" target="_blank" class="btn btn-primary btn-sm">CRAN</a>
+<a href="https://link.springer.com/article/10.1007/s00180-018-0817-8" class="btn btn-outline btn-sm">Paper</a>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-software">GitHub</span><span class="card-tag tag-year">R functions</span></div>
+<h3>jcggm</h3>
+<p><span data-lang="it">Il modello Joint Conditional Graphical LASSO con valori censurati e/o mancanti.</span><span data-lang="en">The Joint Conditional Graphical LASSO model with censored and/or missing values.</span></p>
+<div class="card-actions">
+<a href="https://academic.oup.com/jrsssc/article/74/1/204/7820613" class="btn btn-outline btn-sm">Paper</a>
+<a href="https://github.com/gianluca-sottile/Hematopoiesis-network-inference-from-RT-qPCR-data" target="_blank" class="btn btn-outline btn-sm">GitHub</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== PROGETTI ===== -->
+<section id="progetti" class="section">
+<h2 class="section-title">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+<span data-lang="it">Progetti</span>
+<span data-lang="en">Projects</span>
+</h2>
+<p class="section-subtitle">
+<span data-lang="it">Progetti di ricerca e iniziative collaborative</span>
+<span data-lang="en">Research projects and collaborative initiatives</span>
+</p>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:16px;">PRIN &amp; <span data-lang="it">Progetti Nazionali</span><span data-lang="en">National Projects</span></h3>
+<div class="cards-grid" style="margin-bottom:40px;">
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PRIN 2024</span><span class="card-tag tag-year" data-lang="it">Attivo</span><span class="card-tag tag-year" data-lang="en">Active</span></div>
+<h3>Spatio-temporal Functional Marked Point Processes for Probabilistic Forecasting of Earthquakes</h3>
+<p>PI: Prof. G. Adelfio (UniPa). ERC: PE1. <span data-lang="it">Partecipazione da settembre 2024.</span><span data-lang="en">Participation from September 2024.</span></p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PRIN 2023</span><span class="card-tag tag-year" data-lang="it">Completato</span><span class="card-tag tag-year" data-lang="en">Completed</span></div>
+<h3>COMBINERS — COmplex graphical Models for BIological NEtwoRk Science</h3>
+<p>PI: Prof. F. Stingo (UniFi). Prot. 2022SMNNKY_004 — ERC: PE1. <span data-lang="it">Contributo a 2 paper su JRSS Series C sul sistema ematopoietico e su dati di qualità dell'aria.</span><span data-lang="en">Contributed to 2 papers in JRSS Series C paper on haematopoietic system and air quality data.</span></p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PRIN 2023</span><span class="card-tag tag-year" data-lang="it">Completato</span><span class="card-tag tag-year" data-lang="en">Completed</span></div>
+<h3>BREATHE — Big data, IoT and AI for Air Pollution and Asthma Exacerbations</h3>
+<p>PI: Dr. M. Vettoretti (UniPadova). Prot. 2022EC49YC_002 — ERC: PE6. <span data-lang="it">Contributo al paper su Artificial Intelligence Review su una revisione sistematica sugli approcci di machine learning per la previsione delle esarcebazioni asmatiche.</span><span data-lang="en">Contributed to Artificial Intelligence Review paper on on a systematic review of machine learning approaches for the prediction of asthma exacerbations.</span></p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PRIN 2017</span><span class="card-tag tag-year" data-lang="it">Completato</span><span class="card-tag tag-year" data-lang="en">Completed</span></div>
+<h3>Complex Space-Time Modeling and Functional Analysis for Probabilistic Forecast of Seismic Events</h3>
+<p>PI: Prof. G. Adelfio (UniPa). Prot. 20157PRZC4_001 — ERC: PE1. <span data-lang="it">Contributo al paper su Computational Statistics sui clusters di curve di effetto.</span><span data-lang="en">Contributed to Computational Statistics paper on clusters of effects curves.</span></p>
+</div>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:16px;">PON, PO FESR &amp; <span data-lang="it">Progetti Applicati</span><span data-lang="en">Applied Projects</span></h3>
+<div class="cards-grid" style="margin-bottom:40px;">
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PON</span><span class="card-tag tag-year">2017–2020</span></div>
+<h3>PROFOOD — <span data-lang="it">Valorizzazione produzioni lattiero-casearie siciliane</span><span data-lang="en">Valorization of Sicilian dairy products</span></h3>
+<p>PON02_00451_3133441. PI: Prof. B. Portolano (UniPa). <span data-lang="it">Selezione SNP per tracciabilità di prodotti lattiero-caseari tipici siciliani. Contributo a 4 paper su genetica del bestiame.</span><span data-lang="en">SNP selection for traceability of typical Sicilian dairy products. Contributed to 4 papers on livestock genetics.</span></p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PON</span><span class="card-tag tag-year">2018–2020</span></div>
+<h3><span data-lang="it">Approccio integrato per prodotti agroalimentari siciliani</span><span data-lang="en">Integrated approach for Sicilian agri-food products</span></h3>
+<p>F/050267/03X32 — PON Imprese e Competitività 2014-2020. PI: Dr. N. Francesca (UniPa).</p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PON</span><span class="card-tag tag-year">2018–2020</span></div>
+<h3><span data-lang="it">Biotecnologie molecolari per filiere lattiero-casearie</span><span data-lang="en">Molecular biotechnologies for dairy supply chains</span></h3>
+<p>PON01_02249. PI: Prof. B. Portolano (UniPa). <span data-lang="it">Contributo al paper Livestock Science su coat color sidedness nei bovini.</span><span data-lang="en">Contributed to Livestock Science paper on coat color sidedness in cattle.</span></p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PSRN</span><span class="card-tag tag-year">2020–2022</span></div>
+<h3>LEO — Livestock Environment Opendata</h3>
+<p>PSRN 2014-2020, Sottomisura 16.2, PRJ-0185. PI: Prof. B. Portolano (UniPa). <span data-lang="it">Contributo al paper Scientific Reports su meta-analisi di razze bovine europee.</span><span data-lang="en">Contributed to Scientific Reports paper on European cattle breeds meta-analysis.</span></p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PO FESR</span><span class="card-tag tag-year">2019–2022</span></div>
+<h3>TRAIProL@C — <span data-lang="it">Tracciabilità lattiero-casearia ovine</span><span data-lang="en">Traceability of sheep dairy products</span></h3>
+<p>PO FESR 2014-2020, Misura 1.1.5. PI: Prof. M.T. Sardina (UniPa). <span data-lang="it">Autenticazione e tracciabilità di prodotti lattiero-caseari ovini innovativi e monorazza.</span><span data-lang="en">Authentication and traceability of innovative single-breed sheep dairy products.</span></p>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">Clinical</span><span class="card-tag tag-year">2018–2020</span></div>
+<h3>CHASER Study — <span data-lang="it">Asma infantile e ambiente</span><span data-lang="en">Childhood Asthma and Environment</span></h3>
+<p>ClinicalTrial.gov NCT02433275. Coordinator: Dr. S. La Grutta. <span data-lang="it">Modellizzazione della cronicità dell'asma via modelli multi-stato e a rischi competitivi. Contributo al paper JACI.</span><span data-lang="en">Modeling asthma chronicity via multi-state and competing risks models. Contributed to JACI paper.</span></p>
+</div>
+</div>
+
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:16px;">
+<span data-lang="it">Divulgazione &amp; Outreach</span>
+<span data-lang="en">Dissemination &amp; Outreach</span>
+</h3>
+<div class="cards-grid">
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">CoViSTAT19</span><span class="card-tag tag-year">2020</span></div>
+<h3><span data-lang="it">Monitoraggio Statistico dell'Epidemia COVID-19 in Italia</span><span data-lang="en">Statistical Monitoring of the COVID-19 Epidemic in Italy</span></h3>
+<p><span data-lang="it">Sito del gruppo di ricerca con analisi e riflessioni sull'evoluzione dell'epidemia COVID-19 in Italia. Modellistica statistica per monitorare e predire l'evoluzione epidemica.</span><span data-lang="en">Research group website providing analyses and reflections on the COVID-19 epidemic evolution in Italy. Statistical modeling to monitor and predict epidemic evolution.</span></p>
+<div class="card-actions">
+<a href="https://www.unipa.it/CoViSTAT19---ANALISI-DATI-E-PREVISIONI-SU-COVID-19-/" class="btn btn-primary btn-sm">Website</a>
+</div>
+</div>
+<div class="card">
+<div class="card-header"><span class="card-tag tag-project">PON AIM</span><span class="card-tag tag-year">Research</span></div>
+<h3><span data-lang="it">Modellizzazione del Sistema microRNA</span><span data-lang="en">Modeling of the microRNA System</span></h3>
+<p><span data-lang="it">Creazione di modelli di interazione microRNA-target per diversi tessuti usando database pubblici (NIH-TCGA). Sviluppo di algoritmi per predire geni regolati da microRNAs.</span><span data-lang="en">Creation of microRNA-target interaction network models for different tissues using public databases (NIH-TCGA). Development of algorithms for predicting genes regulated by microRNAs.</span></p>
+<div class="card-actions">
+<a href="https://www.unipa.it/dipartimenti/seas/progetti-aim/attivit-n.-2/index.html" class="btn btn-primary btn-sm">Project Page</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== TALKS ===== -->
+<section id="talks" class="section">
+  <h2 class="section-title">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+      <circle cx="9" cy="7" r="4"></circle>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+    </svg>
+    Talks &amp; Conferences
+  </h2>
+
+  <p class="section-subtitle">
+    <span data-lang="it">Talks invitati, contributi a conferenze, poster e attività di organizzazione scientifica</span>
+    <span data-lang="en">Invited talks, conference contributions, posters, and scientific organization</span>
+  </p>
+
+  <div class="talks-pill">
+    <span data-lang="it">Talks invitati</span>
+    <span data-lang="en">Invited talks</span>
+  </div>
+
+  <div class="featured-talks-grid">
+    <div class="featured-talk-card">
+      <div class="pub-title">A Unified Framework for Robust Estimation and Regression using Parametric Quantile Functions</div>
+      <div class="pub-authors">Sottile G., Frumento P.</div>
+      <div class="pub-venue">ICSDS 2025 — International Conference on Statistics and Data Science, Seville, Spain, December 15–18, 2025</div>
+      <div class="pub-badges">
+        <span class="badge badge-conference">Invited</span>
+      </div>
+    </div>
+
+    <div class="featured-talk-card">
+      <div class="pub-title">Sparse Multiple Gaussian Graphical Models for partially observed data</div>
+      <div class="pub-authors">Sottile G., Augugliaro L., Vinciotti V.</div>
+      <div class="pub-venue">SIS 2025 — Statistics for Innovation, Genova, Italy, June 16–18, 2025</div>
+      <div class="pub-badges">
+        <span class="badge badge-conference">Invited</span>
+      </div>
+    </div>
+
+    <div class="featured-talk-card">
+      <div class="pub-title">Sparse inference of the multiple conditional Gaussian graphical model from heterogeneous and partially observed data</div>
+      <div class="pub-authors">Sottile G., Augugliaro L., Vinciotti V.</div>
+      <div class="pub-venue">Workshop on Complex Graphical Models for Biological Network Science, University of Padova, September 3–4, 2024</div>
+      <div class="pub-badges">
+        <span class="badge badge-conference">Invited</span>
+      </div>
+    </div>
+
+    <div class="featured-talk-card">
+      <div class="pub-title">An extension of the censored Gaussian lasso estimator</div>
+      <div class="pub-authors">Sottile G., Augugliaro L., Vinciotti V.</div>
+      <div class="pub-venue">European Meeting of Statisticians (EMS 2019), Palermo, July 22–26, 2019</div>
+      <div class="pub-badges">
+        <span class="badge badge-conference">Invited</span>
+      </div>
+    </div>
+
+    <div class="featured-talk-card">
+      <div class="pub-title">Non-crossing parametric quantile functions: an application to extreme temperatures</div>
+      <div class="pub-authors">Sottile G., Frumento P.</div>
+      <div class="pub-venue">SIS 2019 — Smart Statistics for Smart Applications, Milano, June 18–21, 2019</div>
+      <div class="pub-badges">
+        <span class="badge badge-conference">Invited</span>
+      </div>
+    </div>
+
+    <div class="featured-talk-card">
+      <div class="pub-title">A new tuning parameter selector in lasso regression</div>
+      <div class="pub-authors">Sottile G., Muggeo V.M.R.</div>
+      <div class="pub-venue">SIS 2019 — Smart Statistics for Smart Applications, Milano, June 18–21, 2019</div>
+      <div class="pub-badges">
+        <span class="badge badge-conference">Invited</span>
+      </div>
+    </div>
+
+    <div class="featured-talk-card">
+      <div class="pub-title">A new method for curves clustering in general dependence models</div>
+      <div class="pub-authors">Sottile G., Adelfio G.</div>
+      <div class="pub-venue">CRONOS Workshop on Multivariate Data Analysis and Software, Limassol, Cyprus, April 3–5, 2018</div>
+      <div class="pub-badges">
+        <span class="badge badge-conference">Invited</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-divider"></div>
+
+  <div class="talks-pill">
+    <span data-lang="it">Contributi e poster per anno</span>
+    <span data-lang="en">Contributed talks and posters by year</span>
+  </div>
+
+  <div class="talks-year-index">
+    <a href="#talks-2026" class="talks-year-chip">2026</a>
+    <a href="#talks-2025" class="talks-year-chip">2025</a>
+    <a href="#talks-2024" class="talks-year-chip">2024</a>
+    <a href="#talks-2023" class="talks-year-chip">2023</a>
+    <a href="#talks-2022" class="talks-year-chip">2022</a>
+    <a href="#talks-2021" class="talks-year-chip">2021</a>
+    <a href="#talks-2019" class="talks-year-chip">2019</a>
+    <a href="#talks-2018" class="talks-year-chip">2018</a>
+    <a href="#talks-2017" class="talks-year-chip">2017</a>
+    <a href="#talks-2016" class="talks-year-chip">2016</a>
+  </div>
+
+  <div class="talks-year-block" id="talks-2026">
+    <div class="talks-year-heading">2026</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">Milk Traceability via Functional Data Analysis and Machine Learning Techniques</div>
+        <div class="pub-authors">Pinello D., Sottile, G., Mineo A., Mastrangelo S., Augugliaro L., Cesarani, A.</div>
+        <div class="pub-venue">SDS 2026, Caserta, March 30-31 and April 1, 2026</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="talks-year-block" id="talks-2025">
+    <div class="talks-year-heading">2025</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">Time Series Bootstrap for Renewable Energy Analysis in Power Grid Optimization</div>
+        <div class="pub-authors">Marcon G., Marletta A., Moradi S., Zizzo G., Favuzza S., Sottile G.</div>
+        <div class="pub-venue">SIS 2025, Genova, June 16–18, 2025 — <strong>3rd Best Poster Award</strong></div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Poster</span>
+          <span class="badge badge-award">Award</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">A Novel Spectral Density Operator Approach to Unveil Dynamic Time Dependencies</div>
+        <div class="pub-authors">Gagliano A., Di Maria C., Sottile G., Beutler-Traktovenko S., Augugliaro L., Vitelli V.</div>
+        <div class="pub-venue">Contributions to Statistics, Novara, June 25–27, 2025</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Multichannel ECG Spectral Analysis via Functional Data Methods</div>
+        <div class="pub-authors">Gagliano A., Di Maria C., Sottile G., Beutler-Traktovenko S., Augugliaro L., Vitelli V.</div>
+        <div class="pub-venue">SIS 2025, Genova, June 16–18, 2025</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-year-block" id="talks-2024">
+    <div class="talks-year-heading">2024</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">Single-cell Sequencing Data: Critical Analysis and Definition of Statistical Models</div>
+        <div class="pub-authors">Gagliano A., Sottile G., Sciaraffa N., Coronnello C., Augugliaro L.</div>
+        <div class="pub-venue">SDS-SIS 2024, Palermo, April 11–12, 2024</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Integrating Pseudo-time in Network Interaction Analysis to Uncover Genetic Pathways in Thyroid Cancer</div>
+        <div class="pub-authors">Gagliano A., Sottile G., Sciaraffa N., Coronnello C., Augugliaro L.</div>
+        <div class="pub-venue">SIS 2024, Bari, June 17–20, 2024</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Asthma Prediction Tool in Preschool Children: Evidence from Statistical Learning</div>
+        <div class="pub-authors">Pandolfo A., Sottile G., Malizia V., Shatarat O., Lazzara V., Muggeo V., Viegi G., La Grutta S.</div>
+        <div class="pub-venue">SIS 2024, Bari, June 17–20, 2024</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Segmented quantile regression process with tau-varying breakpoints</div>
+        <div class="pub-authors">Muggeo V., Sottile G.</div>
+        <div class="pub-venue">IWSM 2024, Durham, UK, July 14–19, 2024</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-year-block" id="talks-2023">
+    <div class="talks-year-heading">2023</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">Sparse Inference in functional conditional Gaussian Graphical Models under Partial Separability</div>
+        <div class="pub-authors">Fici R., Sottile G., Augugliaro L.</div>
+        <div class="pub-venue">SDS 2023, Pavia, April 27–28, 2023</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Conditional Gaussian Graphical Models for Functional Variables with Partially Separable Operators</div>
+        <div class="pub-authors">Fici R., Sottile G., Augugliaro L.</div>
+        <div class="pub-venue">SEAS 2023, Ancona, June 21–23, 2023</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-year-block" id="talks-2022">
+    <div class="talks-year-heading">2022</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">The Joint Censored Gaussian Graphical Lasso Model</div>
+        <div class="pub-authors">Sottile G., Augugliaro L., Vinciotti V.</div>
+        <div class="pub-venue">SIS 2022, Caserta, June 22–24, 2022</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-year-block" id="talks-2021">
+    <div class="talks-year-heading">2021</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">Sparse Inference in Covariate Adjusted Censored Gaussian Graphical Models</div>
+        <div class="pub-authors">Augugliaro L., Sottile G., Mineo A.</div>
+        <div class="pub-venue">CLADAG 2021, Firenze, September 9–11, 2021</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Covariate adjusted censored Gaussian lasso estimator</div>
+        <div class="pub-authors">Augugliaro L., Sottile G., Vinciotti V.</div>
+        <div class="pub-venue">SIS 2021, Pisa, June 21–25, 2021</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Contributed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-year-block" id="talks-2019">
+    <div class="talks-year-heading">2019</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">Non-crossing quantile regression via monotone B-spline varying coefficients</div>
+        <div class="pub-authors">Sottile G., Muggeo V.M.R.</div>
+        <div class="pub-venue">IWSM 2019, Guimarães, Portugal, July 7–12, 2019</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Poster</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-year-block" id="talks-2018">
+    <div class="talks-year-heading">2018</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">The induced smoothing for penalized quantile regression</div>
+        <div class="pub-authors">Sottile G., Muggeo V.M.R.</div>
+        <div class="pub-venue">IWSM 2018, Bristol, UK, July 16–20, 2018</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Poster</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-year-block" id="talks-2017">
+    <div class="talks-year-heading">2017</div>
+    <div class="pub-list compact-talks">
+      <div class="pub-item">
+        <div class="pub-title">A new approach for clustering of effects in quantile regression</div>
+        <div class="pub-authors">Sottile G., Adelfio G.</div>
+        <div class="pub-venue">IWSM 2017, Groningen, Netherlands, July 3–7, 2017</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Poster</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-year-block" id="talks-2016">
+    <div class="talks-year-heading">2016</div>
+    <div class="pub-list compact-talks" style="margin-bottom:36px;">
+      <div class="pub-item">
+        <div class="pub-title">Tuning parameter selection in LASSO regression</div>
+        <div class="pub-authors">Sottile G., Muggeo V.M.R.</div>
+        <div class="pub-venue">IWSM 2016, Groningen, Netherlands, July 4–8, 2016</div>
+        <div class="pub-badges">
+          <span class="badge badge-conference">Poster</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="talks-divider"></div>
+
+  <div class="talks-pill">
+    <span data-lang="it">Organizzazione scientifica</span>
+    <span data-lang="en">Scientific organization</span>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-talk">Scientific Committee</span>
+        <span class="card-tag tag-year">2026</span>
+      </div>
+      <h3>IFCS 2026 — 19th Conference Of The International Federation Of Classification Societies</h3>
+      <p>Università degli Studi di Milano and Milano-Bicocca, July 14–16, 2026. <span data-lang="it">Responsabile locale: Prof. F. Greselin.</span><span data-lang="en">Local chair: Prof. F. Greselin.</span></p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-talk">Organizer</span>
+        <span class="card-tag tag-year">2026</span>
+      </div>
+      <h3>JADT 2026 — 18th International Conference on Statistical Analysis of Textual Data</h3>
+      <p>Università degli Studi di Palermo, July 8–10, 2026. <span data-lang="it">Responsabile locale: Prof. A. Plaia.</span><span data-lang="en">Local chair: Prof. A. Plaia.</span></p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-talk">Organizer</span>
+        <span class="card-tag tag-year">2024</span>
+      </div>
+      <h3>SDS-SIS 2024 — Statistics and Data Science</h3>
+      <p>Università degli Studi di Palermo, April 11–12, 2024. <span data-lang="it">Responsabile locale: Prof. A. Plaia.</span><span data-lang="en">Local chair: Prof. A. Plaia.</span></p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-talk">Organizer</span>
+        <span class="card-tag tag-year">2023</span>
+      </div>
+      <h3>GRASPA-SIS 2023 — Environmental Statistics</h3>
+      <p>Università degli Studi di Palermo, July 10–11, 2023. <span data-lang="it">Responsabile locale: Prof. G. Adelfio.</span><span data-lang="en">Local chair: Prof. G. Adelfio.</span></p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-talk">Organizer</span>
+        <span class="card-tag tag-year">2022</span>
+      </div>
+      <h3>AMASES 2022 — Mathematics Applied to Social and Economic Sciences</h3>
+      <p>Università degli Studi di Palermo, September 22–24, 2022. <span data-lang="it">Responsabile locale: Prof. A. Consiglio.</span><span data-lang="en">Local chair: Prof. A. Consiglio.</span></p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-talk">Session Chair</span>
+        <span class="card-tag tag-year">2023</span>
+      </div>
+      <h3>SDS 2023 — High Dimensional Data</h3>
+      <p>Università degli Studi di Pavia, April 27–28, 2023. <span data-lang="it">Sessione con F. Stingo, V. Vinciotti, E. Wit.</span><span data-lang="en">Session with F. Stingo, V. Vinciotti, E. Wit.</span></p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-tag tag-talk">Session Chair</span>
+        <span class="card-tag tag-year">2021</span>
+      </div>
+      <h3>CLADAG 2021 — Penalized Techniques for Data Analysis</h3>
+      <p>Università degli Studi di Firenze, September 9–11, 2021. <span data-lang="it">Sessione con M. Chiodi, P. Giudici, E.J.C. Wit.</span><span data-lang="en">Session with M. Chiodi, P. Giudici, E.J.C. Wit.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTATTI ===== -->
+<section id="contatti" class="section">
+<h2 class="section-title">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+<span data-lang="it">Contatti</span>
+<span data-lang="en">Contact</span>
+</h2>
+<p class="section-subtitle">
+<span data-lang="it">Per collaborazioni, supervisione tesi o informazioni sui corsi</span>
+<span data-lang="en">Get in touch for collaborations, thesis supervision, or course information</span>
+</p>
+
+<div class="contact-grid">
+<div class="contact-info">
+<h3>
+<span data-lang="it">Informazioni di Contatto</span>
+<span data-lang="en">Contact Information</span>
+</h3>
+
+<div class="contact-item">
+    <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+    </div>
+    <div>
+        <strong data-lang="it">Indirizzo</strong><strong data-lang="en">Address</strong>
+        <span data-lang="it">Dipartimento di Scienze Econmiche, Aziendali e Statistiche (SEAS)<br>Università degli Studi di Palermo<br>Viale delle Scienze Ed. 13, 90128 Palermo, Italia</span>
+        <span data-lang="en">Department of Economics, Business and Statistics (SEAS)<br>University of Palermo<br>Viale delle Scienze Bldg. 13, 90128 Palermo, Italy</span>
+    </div>
+</div>
+
+<div class="contact-item">
+  <div class="contact-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+      <polyline points="22,6 12,13 2,6"></polyline>
+    </svg>
+  </div>
+  <div>
+    <strong>Email</strong>
+    <span><a href="mailto:gianluca.sottile@unipa.it">gianluca.sottile@unipa.it</a></span>
+  </div>
+</div>
+
+<div class="contact-item">
+    <div class="contact-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+    </div>
+    <div>
+        <strong data-lang="it">Orario di Ricevimento</strong><strong data-lang="en">Office Hours</strong>
+        <span data-lang="it">Su appuntamento via email</span><span data-lang="en">By appointment via email</span>
+    </div>
+</div>
+
+<div class="contact-item">
+<div class="contact-icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+</div>
+<div>
+<strong>Profiles</strong>
+<span>
+<a href="https://scholar.google.com/citations?hl=it&user=qc0KUpwAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener noreferrer">Google Scholar</a> ·
+<a href="https://github.com/gianluca-sottile" target="_blank" rel="noopener noreferrer">GitHub</a>
+<a href="https://orcid.org/0000-0001-9347-7251" target="_blank" rel="noopener noreferrer">ORCID</a> ·
+<a href="https://www.researchgate.net/profile/Gianluca-Sottile" target="_blank" rel="noopener noreferrer">ResearchGate</a> ·
+<a href="https://www.unipa.it/persone/docenti/s/gianluca.sottile" target="_blank" rel="noopener noreferrer">UniPa</a>
+<a href="https://www.scopus.com/authid/detail.uri?authorId=57197724197" target="_blank" rel="noopener noreferrer">Scopus</a> ·
+<a href="https://www.webofscience.com/wos/author/record/P-1732-2018" target="_blank" rel="noopener noreferrer">Web of Science</a> ·
+</span>
+</div>
+</div>
+</div>
+
+<div class="contact-form">
+<h3 style="font-size:1.1rem;font-weight:600;color:var(--primary);margin-bottom:20px;">
+<span data-lang="it">Invia un messaggio</span>
+<span data-lang="en">Send a message</span>
+</h3>
+<form action="https://formspree.io/f/mgorgblz" method="POST">
+  <input type="hidden" name="_subject" value="New message from academic website">
+    
+  <div class="form-group">
+    <label for="name">
+      <span data-lang="it">Nome</span><span data-lang="en">Name</span>
+    </label>
+    <input type="text" id="name" name="name" placeholder="Your name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Your email" required>
+  </div>
+
+  <div class="form-group">
+    <label for="subject">
+      <span data-lang="it">Oggetto</span><span data-lang="en">Subject</span>
+    </label>
+    <input type="text" id="subject" name="subject" placeholder="Message subject" required>
+  </div>
+
+  <div class="form-group">
+    <label for="message">
+      <span data-lang="it">Messaggio</span><span data-lang="en">Message</span>
+    </label>
+    <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="22" y1="2" x2="11" y2="13"></line>
+      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    </svg>
+    <span data-lang="it">Invia messaggio</span>
+    <span data-lang="en">Send message</span>
+  </button>
+</form>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer>
+<p>© 2026 Gianluca Sottile — <span data-lang="it">Dipartimento di Scienze Economiche, Aziendali e Statistiche, Università degli Studi di Palermo</span><span data-lang="en">Department of Economics, Business and Statistics, University of Palermo</span></p>
+<p style="margin-top:4px;"><span data-lang="it">Ultimo aggiornamento</span><span data-lang="en">Last updated</span> · April 2026 · <a href="#" onclick="window.print();return false;"><span data-lang="it">Versione stampabile</span><span data-lang="en">Printable version</span></a></p>
+</footer>
+
+<script>
+// ===== LANGUAGE SWITCHER =====
+function setLang(lang){
+    document.body.classList.remove('lang-it', 'lang-en');
+    document.body.classList.add('lang-' + lang);
+
+    document.querySelectorAll('.lang-btn').forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('onclick').includes("'" + lang + "'"));
+    });
+
+    localStorage.setItem('preferredLang', lang);
+}
+
+// Load saved language
+var savedLang = localStorage.getItem('preferredLang');
+if(savedLang){ setLang(savedLang); }
+
+// ===== TAB NAVIGATION =====
+function showSection(id){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  var t=document.getElementById(id); if(t) t.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(function(l){l.classList.toggle('active',l.getAttribute('data-target')===id);});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+    function handleHash() {
+      var h = window.location.hash.replace('#', '') || 'bio';
+
+      var mainSections = ['bio', 'didattica', 'ricerca', 'software', 'progetti', 'talks', 'contatti'];
+
+      if (mainSections.includes(h)) {
+        showSection(h);
+        return;
+      }
+
+      if (h.startsWith('pub-')) {
+        showSection('ricerca');
+        setTimeout(function () {
+          var target = document.getElementById(h);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+        return;
+      }
+
+      if (h.startsWith('talks-')) {
+        showSection('talks');
+        setTimeout(function () {
+          var target = document.getElementById(h);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+        return;
+      }
+
+      showSection('bio');
+    }
+
+    window.addEventListener('DOMContentLoaded', handleHash);
+    window.addEventListener('hashchange', handleHash);
+
+// ===== MOBILE MENU =====
+function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('open');}
+window.addEventListener('resize',function(){if(window.innerWidth>768)document.getElementById('mobileNav').classList.remove('open');});
+document.addEventListener('click',function(e){
+  var m=document.getElementById('mobileNav'),b=document.querySelector('.mobile-menu-btn');
+  if(!m.contains(e.target)&&!b.contains(e.target))m.classList.remove('open');
+});
+
+// ===== HEADER SHADOW =====
+window.addEventListener('scroll',function(){
+  var h=document.querySelector('header');
+  if(window.scrollY>10)h.style.boxShadow='0 2px 20px rgba(139,26,45,0.08)'; else h.style.boxShadow='none';
+});
+</script>
+
+</body>
+</html>
