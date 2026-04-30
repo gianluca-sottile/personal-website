@@ -2571,7 +2571,13 @@ Software
 <span data-lang="it">Invia un messaggio</span>
 <span data-lang="en">Send a message</span>
 </h3>
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+<form
+    name="contact"
+    method="POST"
+    action="/success.html"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+>
   <input type="hidden" name="form-name" value="contact">
   
   <p style="display:none;">
@@ -2684,6 +2690,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var savedLang = localStorage.getItem('preferredLang') || 'it';
     setLang(savedLang);
 });
+(function () {
+    var savedLang = localStorage.getItem('preferredLang') || 'it';
+    document.body.classList.add('lang-' + savedLang);
+    document.documentElement.lang = savedLang;
+    document.title = savedLang === 'it'
+        ? 'Messaggio inviato — Gianluca Sottile'
+        : 'Message sent — Gianluca Sottile';
+})();
 
 // Load saved language
 var savedLang = localStorage.getItem('preferredLang');
