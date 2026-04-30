@@ -2571,33 +2571,75 @@ Software
 <span data-lang="it">Invia un messaggio</span>
 <span data-lang="en">Send a message</span>
 </h3>
-<form action="https://formspree.io/f/mgorgblz" method="POST">
-  <input type="hidden" name="_subject" value="New message from academic website">
-    
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="contact">
+  
+  <p style="display:none;">
+    <label>
+      Don’t fill this out if you’re human:
+      <input name="bot-field">
+    </label>
+  </p>
+
   <div class="form-group">
     <label for="name">
       <span data-lang="it">Nome</span><span data-lang="en">Name</span>
     </label>
-    <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      data-placeholder-it="Il tuo nome"
+      data-placeholder-en="Your name"
+      placeholder="Il tuo nome"
+      autocomplete="name"
+      required
+    >
   </div>
 
   <div class="form-group">
     <label for="email">Email</label>
-    <input type="email" id="email" name="email" placeholder="Your email" autocomplete="email" required>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      data-placeholder-it="La tua email"
+      data-placeholder-en="Your email"
+      placeholder="La tua email"
+      autocomplete="email"
+      required
+    >
   </div>
 
   <div class="form-group">
     <label for="subject">
       <span data-lang="it">Oggetto</span><span data-lang="en">Subject</span>
     </label>
-    <input type="text" id="subject" name="subject" placeholder="Message subject" autocomplete="off" required>
+    <input
+      type="text"
+      id="subject"
+      name="subject"
+      data-placeholder-it="Oggetto del messaggio"
+      data-placeholder-en="Message subject"
+      placeholder="Oggetto del messaggio"
+      autocomplete="off"
+      required
+    >
   </div>
 
   <div class="form-group">
     <label for="message">
       <span data-lang="it">Messaggio</span><span data-lang="en">Message</span>
     </label>
-    <textarea id="message" name="message" placeholder="Write your message..." autocomplete="off" required></textarea>
+    <textarea
+      id="message"
+      name="message"
+      data-placeholder-it="Scrivi il tuo messaggio..."
+      data-placeholder-en="Write your message..."
+      placeholder="Scrivi il tuo messaggio..."
+      autocomplete="off"
+      required
+    ></textarea>
   </div>
 
   <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
@@ -2622,6 +2664,11 @@ Software
 
 <script>
 // ===== LANGUAGE SWITCHER =====
+function updatePlaceholders(lang) {
+  document.querySelectorAll('[data-placeholder-it][data-placeholder-en]').forEach(function(el) {
+    el.placeholder = el.getAttribute('data-placeholder-' + lang);
+  });
+}
 function setLang(lang){
     document.body.classList.remove('lang-it', 'lang-en');
     document.body.classList.add('lang-' + lang);
@@ -2630,8 +2677,13 @@ function setLang(lang){
         b.classList.toggle('active', b.getAttribute('onclick').includes("'" + lang + "'"));
     });
 
+    updatePlaceholders(lang);
     localStorage.setItem('preferredLang', lang);
 }
+document.addEventListener('DOMContentLoaded', function() {
+    var savedLang = localStorage.getItem('preferredLang') || 'it';
+    setLang(savedLang);
+});
 
 // Load saved language
 var savedLang = localStorage.getItem('preferredLang');
@@ -2644,39 +2696,38 @@ function showSection(id){
   document.querySelectorAll('.nav-link').forEach(function(l){l.classList.toggle('active',l.getAttribute('data-target')===id);});
   window.scrollTo({top:0,behavior:'smooth'});
 }
-    function handleHash() {
-      var h = window.location.hash.replace('#', '') || 'bio';
+function handleHash() {
+    var h = window.location.hash.replace('#', '') || 'bio';
 
-      var mainSections = ['bio', 'didattica', 'ricerca', 'software', 'progetti', 'talks', 'contatti'];
+    var mainSections = ['bio', 'didattica', 'ricerca', 'software', 'progetti', 'talks', 'contatti'];
 
-      if (mainSections.includes(h)) {
+    if (mainSections.includes(h)) {
         showSection(h);
         return;
-      }
+    }
 
-      if (h.startsWith('pub-')) {
+    if (h.startsWith('pub-')) {
         showSection('ricerca');
         setTimeout(function () {
-          var target = document.getElementById(h);
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            var target = document.getElementById(h);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
         return;
-      }
+    }
 
-      if (h.startsWith('talks-')) {
+    if (h.startsWith('talks-')) {
         showSection('talks');
         setTimeout(function () {
           var target = document.getElementById(h);
           if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
         return;
-      }
-
-      showSection('bio');
     }
-
-    window.addEventListener('DOMContentLoaded', handleHash);
-    window.addEventListener('hashchange', handleHash);
+    showSection('bio');
+}
+    
+window.addEventListener('DOMContentLoaded', handleHash);
+window.addEventListener('hashchange', handleHash);
 
 // ===== MOBILE MENU =====
 function toggleMobileMenu(){document.getElementById('mobileNav').classList.toggle('open');}
