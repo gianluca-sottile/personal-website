@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gianluca Sottile — Associate Professor of Statistics</title>
-<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" href="/logo-gs.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -44,11 +44,32 @@ header {
 .brand {
   display:flex; align-items:center; gap:14px; text-decoration:none;
 }
-.brand-avatar {
+/*.brand-avatar {
   width:44px; height:44px; border-radius:50%;
   background:linear-gradient(135deg,var(--primary),var(--primary-light));
   display:flex; align-items:center; justify-content:center;
   color:white; font-weight:700; font-size:1.1rem; flex-shrink:0;
+}*/
+.brand-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 2px;
+}
+.brand-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transform: scale(1.1);
 }
 .brand-text h1 {
   font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700;
@@ -59,24 +80,6 @@ header {
 }
 
 /* ===== LANG TOGGLE ===== */
-    /*.lang-toggle {
-  display:flex; align-items:center; gap:6px;
-  background:var(--bg); border:1.5px solid var(--border);
-  border-radius:20px; padding:3px;
-  margin-left:12px;
-  flex-shrink:0;
-}
-.lang-btn {
-  padding:5px 12px; border-radius:16px; border:none; background:none;
-  font-size:0.8rem; font-weight:600; color:var(--text-muted);
-  cursor:pointer; transition:var(--transition); font-family:inherit;
-}
-.lang-btn.active {
-  background:var(--primary); color:white;
-}
-.lang-btn:hover:not(.active) {
-  color:var(--primary); background:rgba(139,26,45,0.06);
-}*/
 .lang-toggle {
     display: inline-flex;
     align-items: center;
@@ -746,7 +749,10 @@ footer a:hover { text-decoration:underline; }
 <header>
 <div class="header-inner">
 <a href="#bio" class="brand" onclick="showSection('bio')">
-<div class="brand-avatar">GS</div>
+<!-- <div class="brand-avatar">GS</div> -->
+<div class="brand-avatar">
+    <img src="logo-gs.png" alt="Gianluca Sottile logo" class="brand-avatar-img">
+</div>
 <div class="brand-text">
 <h1>Gianluca Sottile</h1>
 <span data-lang="it">Università degli Studi di Palermo</span>
