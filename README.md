@@ -33,3 +33,5 @@ University of Palermo
 
 All rights reserved.  
 The content of this website, including text, layout, and design, may not be reproduced or redistributed without permission.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5c0d4a17-f7b5-43e8-a9be-b9fd0ed0823e/deploy-status)](https://app.netlify.com/projects/gianlucasottile/deploys)
