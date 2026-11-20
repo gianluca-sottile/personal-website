@@ -1,0 +1,11 @@
+{% extends "page.html" %}
+{% set page_title = t.talks_title %}
+{% block content %}
+{% set talks = site.talks|sort(attribute='date', reverse=true) %}
+{% set invited = talks|selectattr('kind', 'in', ['invited', 'keynote'])|list %}
+{% set contributed = talks|selectattr('kind', 'in', ['talk', 'poster'])|list %}
+{% set org = talks|selectattr('kind', 'in', ['organizer', 'committee', 'chair'])|list %}
+{% if invited %}<section class="section talks"><h2>{{ t.talks_invited }}</h2><ul class="talk-list">{% for k in invited %}{{ m.talk(k) }}{% endfor %}</ul></section>{% endif %}
+{% if contributed %}<section class="section talks"><h2>{{ t.talks_contributed }}</h2><ul class="talk-list">{% for k in contributed %}{{ m.talk(k) }}{% endfor %}</ul></section>{% endif %}
+{% if org %}<section class="section talks"><h2>{{ t.talks_org }}</h2><ul class="talk-list">{% for k in org %}{{ m.talk(k) }}{% endfor %}</ul></section>{% endif %}
+{% endblock %}

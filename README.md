@@ -1,37 +1,16 @@
-# Gianluca Sottile — Personal Website
+# gianlucasottile.rbind.io
 
-This repository contains the source code for the personal academic website of **Gianluca Sottile**, Associate Professor of Statistics at the **University of Palermo**.
+Vetrina accademica di Gianluca Sottile — sito statico bilingue (EN `/`, IT `/it/`).
 
-## Contents
+## Build locale
+```bash
+pip install -r requirements.txt -r requirements-dev.txt
+python scripts/build.py      # genera site/
+python -m pytest             # test
+python -m http.server -d site 8000
+```
 
-The website includes:
-- short biography and academic profile
-- teaching activities
-- research publications
-- software and projects
-- talks and scientific organization
-- contact information
+## Cosa si modifica a mano
+Solo i file in `data/` (vedi `data/schema.md`). Le pubblicazioni (`data/publications.json`) e i dati dei pacchetti (`data/software.json`) si aggiornano da soli ogni settimana.
 
-## Technologies
-
-This website is built with:
-- HTML
-- CSS
-- JavaScript
-
-## Deployment
-
-The website is designed to be deployed as a static site using **GitHub Pages**.
-
-## Author
-
-**Gianluca Sottile**  
-Department of Economics, Business and Statistics  
-University of Palermo
-
-## Copyright
-
-All rights reserved.  
-The content of this website, including text, layout, and design, may not be reproduced or redistributed without permission.
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5c0d4a17-f7b5-43e8-a9be-b9fd0ed0823e/deploy-status)](https://app.netlify.com/projects/gianlucasottile/deploys)
+Il vecchio sito Hugo è archiviato in `legacy/` (non pubblicato).
