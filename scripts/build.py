@@ -1,6 +1,7 @@
 """Build the static site: data/*.yml + templates -> site/ (EN at /, IT at /it/)."""
 from __future__ import annotations
 
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -12,6 +13,7 @@ import yaml
 
 import data  # noqa: E402
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from markupsafe import Markup, escape
 
 ROOT = Path(__file__).resolve().parents[1]
 LANGS = ("en", "it")
@@ -26,6 +28,21 @@ SAFE_SCHEMES = ("http://", "https://", "mailto:", "/")
 def safe_url(url) -> str:
     url = (url or "").strip()
     return url if url.startswith(SAFE_SCHEMES) and not url.startswith("//") else ""
+
+
+_CODE = re.compile(r"\([^()]{1,24}\)|\b[A-Z0-9]+(?:[-/][A-Z0-9]+)+\b")
+
+
+def keep_codes(text) -> Markup:
+    """Escape text and keep codes such as (STAT-01/A), RTD-B or 13/STAT-01 on one line."""
+    out, last = [], 0
+    text = str(text or "")
+    for m in _CODE.finditer(text):
+        out.append(escape(text[last:m.start()]))
+        out.append(Markup('<span class="nowrap">') + escape(m.group(0)) + Markup("</span>"))
+        last = m.end()
+    out.append(escape(text[last:]))
+    return Markup("").join(out)
 
 
 def url_for(page: str, lang: str) -> str:
@@ -44,6 +61,7 @@ def _env() -> Environment:
     env.globals["LANGS"] = LANGS
     env.globals["BASE_URL"] = BASE_URL
     env.filters["safe_url"] = safe_url
+    env.filters["keep_codes"] = keep_codes
     return env
 
 

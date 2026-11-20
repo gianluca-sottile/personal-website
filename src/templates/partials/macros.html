@@ -1,4 +1,4 @@
-{% macro L(v) %}{% set r = tr(v, lang) %}{% if r.lang != lang and r.text %}<span lang="{{ r.lang }}">{{ r.text }}</span><span class="lang-badge" title="{{ t['lang_badge_' ~ r.lang] }}">{{ r.lang }}</span>{% else %}{{ r.text }}{% endif %}{% endmacro %}
+{% macro L(v) %}{% set r = tr(v, lang) %}{% if r.lang != lang and r.text %}<span lang="{{ r.lang }}">{{ r.text|keep_codes }}</span><span class="lang-badge" title="{{ t['lang_badge_' ~ r.lang] }}">{{ r.lang }}</span>{% else %}{{ r.text|keep_codes }}{% endif %}{% endmacro %}
 {% macro T(v) %}{{ tr(v, lang).text }}{% endmacro %}
 {% macro links(items) %}{% for l in items or [] %}{% set u = l.url|safe_url %}{% if u %}<a class="chip" href="{{ u }}"{% if u.startswith('http') %} rel="noopener"{% endif %}>{{ T(l.label) }}</a>{% endif %}{% endfor %}{% endmacro %}
 {% macro authors(list, me="Sottile") %}{% for a in list %}{% if me in a %}<span class="me">{{ a }}</span>{% else %}{{ a }}{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}{% endmacro %}

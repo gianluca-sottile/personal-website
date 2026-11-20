@@ -4,7 +4,7 @@
 <section class="hero" aria-labelledby="hero-name">
   <div class="hero-text">
     <h1 id="hero-name">Gianluca Sottile</h1>
-    <p class="hero-role">{{ m.T(P.role) }}<br><a href="{{ P.affiliation.url }}">{{ m.T(P.affiliation.name) }}</a></p>
+    <p class="hero-role">{{ m.T(P.role)|keep_codes }}<br><a href="{{ P.affiliation.url }}">{{ m.T(P.affiliation.name) }}</a></p>
     <p class="hero-tagline">{{ m.T(P.tagline) }}</p>
     <ul class="hero-links">
       {% for l in P.links %}<li><a href="{{ l.url|safe_url }}"{% if l.url.startswith('http') %} rel="noopener"{% endif %}>{{ l.label }}</a></li>{% endfor %}

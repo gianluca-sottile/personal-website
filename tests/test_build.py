@@ -82,3 +82,10 @@ def test_hero_paths_distinct_ends():
     ends = [p["end_y"] for p in build.hero_paths()]
     assert len(set(ends)) == len(ends) and all(abs(e - 210) > 10 for e in ends)
     assert min(b - a for a, b in zip(sorted(ends), sorted(ends)[1:])) >= 30
+
+
+def test_keep_codes_prevents_breaking_inside_codes():
+    out = str(build.keep_codes("Associate Professor of Statistics (STAT-01/A)"))
+    assert out == 'Associate Professor of Statistics <span class="nowrap">(STAT-01/A)</span>'
+    assert '<span class="nowrap">RTD-B</span>' in str(build.keep_codes("Assistant Professor RTD-B"))
+    assert "&lt;b&gt;" in str(build.keep_codes("<b>x</b>"))
