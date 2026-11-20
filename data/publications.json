@@ -456,7 +456,7 @@
    "year": 2023,
    "type": "article",
    "url": "https://doi.org/10.1016/j.fufo.2023.100263",
-   "oa_url": "https://ars.els-cdn.com/content/image/1-s2.0-S2666833523000497-ga1_lrg.jpg",
+   "oa_url": "https://doi.org/10.1016/j.fufo.2023.100263",
    "citations": 10,
    "topic": "Consumer behavior in food and health",
    "themes": [],
@@ -1117,7 +1117,7 @@
    "type": "article",
    "url": "https://doi.org/10.1371/journal.pone.0215204",
    "oa_url": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0215204&type=printable",
-   "citations": 51,
+   "citations": 52,
    "topic": "Genetic and phenotypic traits in livestock",
    "themes": [
     "genomics"
