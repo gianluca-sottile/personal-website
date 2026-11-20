@@ -1,1 +1,2 @@
 Latin Modern fonts © GUST e-foundry, GUST Font License (LPPL-compatible). https://www.gust.org.pl/projects/e-foundry/latin-modern
+Carlito fonts (metric-compatible with Calibri, derived from Lato) © tyPoland Lukasz Dziedzic, SIL Open Font License 1.1.

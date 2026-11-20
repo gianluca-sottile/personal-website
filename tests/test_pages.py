@@ -53,3 +53,12 @@ def test_internal_links_resolve(site):
             if not target.exists():
                 bad.append(f"{f.relative_to(site)} -> {href}")
     assert not bad, bad[:10]
+
+
+def test_footer_shows_last_update_and_mobile_tools(site):
+    import datetime as dt
+    html = (site / "it" / "index.html").read_text()
+    assert "Ultimo aggiornamento:" in html and "HTML semplice" not in html
+    assert f'datetime="{dt.date.today().isoformat()}"' in html
+    assert 'class="menu-toggle"' in html and 'aria-controls="main-nav"' in html
+    assert 'class="quick"' in html and 'class="to-top"' in html

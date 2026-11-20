@@ -44,7 +44,6 @@ contact_office: Office
 contact_map: Open map
 lang_badge_en: in English
 lang_badge_it: in Italian
-footer_built: Built with plain HTML. Publications refresh every week.
 draft: draft
 filter_label: Filter publications
 filter_search: Search titles, authors, journals
@@ -75,3 +74,9 @@ level_BSc: BSc
 level_MSc: MSc
 projects_all: All projects
 contact_hours: Office hours
+footer_built: Made with HTML
+footer_updated: Last updated
+menu: Menu
+to_top: Back to top
+quick_label: Explore the site
+months: [January, February, March, April, May, June, July, August, September, October, November, December]

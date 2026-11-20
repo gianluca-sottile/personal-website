@@ -10,6 +10,9 @@
       {% for l in P.links %}<li><a href="{{ l.url|safe_url }}"{% if l.url.startswith('http') %} rel="noopener"{% endif %}>{{ l.label }}</a></li>{% endfor %}
     </ul>
   </div>
+  <nav class="quick" aria-label="{{ t.quick_label }}">
+    {% for p in hero %}<a href="#{{ p.section }}">{{ t['nav_' ~ p.section] }}</a>{% endfor %}
+  </nav>
   <figure class="hero-plot" aria-describedby="hero-caption">
     <svg viewBox="-8 0 840 440" role="group" aria-label="{{ t.hero_hint }}">
       <g class="grid" aria-hidden="true">

@@ -44,7 +44,6 @@ contact_office: Ufficio
 contact_map: Apri la mappa
 lang_badge_en: in inglese
 lang_badge_it: in italiano
-footer_built: Realizzato in HTML semplice. Le pubblicazioni si aggiornano ogni settimana.
 draft: bozza
 filter_label: Filtra le pubblicazioni
 filter_search: Cerca per titolo, autori, rivista
@@ -75,3 +74,9 @@ level_BSc: Laurea triennale
 level_MSc: Laurea magistrale
 projects_all: Tutti i progetti
 contact_hours: Ricevimento
+footer_built: Realizzato in HTML
+footer_updated: "Ultimo aggiornamento:"
+menu: Menu
+to_top: Torna su
+quick_label: Esplora il sito
+months: [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, dicembre]

@@ -1,5 +1,6 @@
 <footer class="site-footer">
   <div class="foot-brand">{% include "partials/wordmark.svg" %}</div>
   <p>{{ m.T(site.profile.affiliation.dept) }}, {{ m.T(site.profile.affiliation.name) }}</p>
-  <p class="muted">{{ t.footer_built }} © {{ site.publications_meta.updated[:4] if site.publications_meta.updated else '2026' }} Gianluca Sottile</p>
+  <p class="muted footer-meta"><span>{{ t.footer_built }}</span><span>{{ t.footer_updated }} <time datetime="{{ build_date.isoformat() }}">{{ build_date.day }} {{ t.months[build_date.month - 1] }} {{ build_date.year }}</time></span><span>© {{ build_date.year }} Gianluca Sottile</span></p>
 </footer>
+<a class="to-top" href="#top" aria-label="{{ t.to_top }}">↑</a>

@@ -142,7 +142,9 @@ def load_context(data_dir: Path) -> dict:
         "news": bool(site.news),
     }
     hero = [p for p in hero_paths() if present.get(p["section"])]
+    import datetime as _dt
     return {"site": site, "tr": data.tr, "drafts": pending, "hero": hero, "counts": counts, "present": present,
+            "build_date": _dt.date.today(),
             "software_meta": meta, "strings": {l: _strings(l) for l in LANGS}}
 
 
