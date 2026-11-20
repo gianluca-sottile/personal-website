@@ -26,5 +26,12 @@
   "downloads_last_month": 598,
   "gh_stars": 0,
   "gh_url": "https://github.com/gianluca-sottile/clustEff"
+ },
+ "jcggm": {
+  "cran_version": null,
+  "cran_published": null,
+  "downloads_last_month": null,
+  "gh_stars": 1,
+  "gh_url": "https://github.com/gianluca-sottile/Hematopoiesis-network-inference-from-RT-qPCR-data"
  }
 }

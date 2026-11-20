@@ -69,7 +69,7 @@
    "themes": [
     "health-env"
    ],
-   "selected": false,
+   "selected": true,
    "links": []
   },
   {
@@ -329,7 +329,7 @@
    "themes": [
     "health-env"
    ],
-   "selected": false,
+   "selected": true,
    "links": []
   },
   {
@@ -638,7 +638,7 @@
    "themes": [
     "health-env"
    ],
-   "selected": false,
+   "selected": true,
    "links": []
   },
   {
@@ -685,7 +685,7 @@
    "themes": [
     "quantile"
    ],
-   "selected": false,
+   "selected": true,
    "links": []
   },
   {
@@ -940,7 +940,7 @@
     "sparse",
     "graphical"
    ],
-   "selected": false,
+   "selected": true,
    "links": []
   },
   {
@@ -1011,7 +1011,7 @@
     "sparse",
     "quantile"
    ],
-   "selected": false,
+   "selected": true,
    "links": [
     {
      "label": "qrcmNP",
@@ -1402,7 +1402,7 @@
     "quantile",
     "functional"
    ],
-   "selected": false,
+   "selected": true,
    "links": [
     {
      "label": "clustEff",
