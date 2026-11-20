@@ -62,3 +62,10 @@ def test_footer_shows_last_update_and_mobile_tools(site):
     assert f'datetime="{dt.date.today().isoformat()}"' in html
     assert 'class="menu-toggle"' in html and 'aria-controls="main-nav"' in html
     assert 'class="quick"' in html and 'class="to-top"' in html
+
+
+def test_back_to_top_targets_non_sticky_element(site):
+    html = (site / "index.html").read_text()
+    assert '<body id="top">' in html and 'class="site-header" id="top"' not in html
+    js = (build.ROOT / "src" / "assets" / "js" / "site.js").read_text()
+    assert "scrollTo({top:0" in js and "preventDefault" in js

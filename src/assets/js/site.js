@@ -33,5 +33,16 @@
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&header.classList.contains('open')){header.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.focus()}});
   }
   var top=document.querySelector('.to-top');
-  if(top){var f=function(){top.classList.toggle('show',window.scrollY>900)};window.addEventListener('scroll',f,{passive:true});f();}
+  if(top){
+    var f=function(){top.classList.toggle('show',window.scrollY>900)};
+    window.addEventListener('scroll',f,{passive:true});f();
+    top.addEventListener('click',function(e){
+      e.preventDefault();
+      var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({top:0,left:0,behavior:reduce?'auto':'smooth'});
+      if(history.replaceState)history.replaceState(null,'',location.pathname+location.search);
+      var brand=document.querySelector('.brand');if(brand)brand.focus({preventScroll:true});
+      top.blur();
+    });
+  }
 })();

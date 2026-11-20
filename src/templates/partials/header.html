@@ -1,5 +1,5 @@
 {% set home = url_for('index', lang) %}
-<header class="site-header" id="top">
+<header class="site-header">
   <a class="brand" href="{{ home }}" aria-label="Gianluca Sottile — home">{% include "partials/wordmark.svg" %}</a>
   <nav class="nav" id="main-nav" aria-label="{{ 'Main' if lang == 'en' else 'Principale' }}">
 {% if present.projects %}    <a href="{{ home }}#projects">{{ t.nav_projects }}</a>{% endif %}
