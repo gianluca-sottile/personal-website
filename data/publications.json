@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20",
+ "updated": "2026-11-23",
  "source": "OpenAlex (ORCID 0000-0001-9347-7251)",
  "items": [
   {
@@ -324,7 +324,7 @@
    "type": "article",
    "url": "https://doi.org/10.1007/s10651-024-00610-0",
    "oa_url": "https://link.springer.com/content/pdf/10.1007/s10651-024-00610-0.pdf",
-   "citations": 4,
+   "citations": 5,
    "topic": "Air Quality and Health Impacts",
    "themes": [
     "health-env"
@@ -376,7 +376,7 @@
    "type": "article",
    "url": "https://doi.org/10.1016/j.jveb.2024.03.006",
    "oa_url": null,
-   "citations": 1,
+   "citations": 2,
    "topic": "Injury Epidemiology and Prevention",
    "themes": [
     "health-env"
@@ -610,7 +610,7 @@
    "type": "article",
    "url": "https://doi.org/10.1016/j.ecolind.2022.109358",
    "oa_url": "https://doi.org/10.1016/j.ecolind.2022.109358",
-   "citations": 19,
+   "citations": 18,
    "topic": "Marine Biology and Ecology Research",
    "themes": [
     "health-env"
@@ -633,7 +633,7 @@
    "type": "article",
    "url": "https://doi.org/10.1007/s00477-021-02028-7",
    "oa_url": "https://link.springer.com/content/pdf/10.1007/s00477-021-02028-7.pdf",
-   "citations": 20,
+   "citations": 21,
    "topic": "Precipitation Measurement and Analysis",
    "themes": [
     "health-env"
@@ -860,7 +860,7 @@
    "type": "article",
    "url": "https://doi.org/10.1111/jbg.12476",
    "oa_url": "http://hdl.handle.net/10447/405944",
-   "citations": 42,
+   "citations": 44,
    "topic": "Genetic and phenotypic traits in livestock",
    "themes": [
     "genomics"
@@ -912,7 +912,7 @@
    "type": "article",
    "url": "https://doi.org/10.1038/s41598-020-71375-2",
    "oa_url": "https://www.nature.com/articles/s41598-020-71375-2.pdf",
-   "citations": 36,
+   "citations": 38,
    "topic": "Genetic and phenotypic traits in livestock",
    "themes": [
     "genomics"
@@ -961,7 +961,7 @@
    "type": "article",
    "url": "https://doi.org/10.1016/j.livsci.2019.05.009",
    "oa_url": null,
-   "citations": 16,
+   "citations": 18,
    "topic": "Genetic and phenotypic traits in livestock",
    "themes": [
     "genomics"
@@ -1429,7 +1429,7 @@
    "type": "article",
    "url": "https://doi.org/10.1111/age.12719",
    "oa_url": null,
-   "citations": 17,
+   "citations": 19,
    "topic": "Genetic and phenotypic traits in livestock",
    "themes": [
     "genomics"
@@ -1475,7 +1475,7 @@
    "type": "article",
    "url": "https://doi.org/10.1111/age.12634",
    "oa_url": null,
-   "citations": 156,
+   "citations": 157,
    "topic": "Genetic and phenotypic traits in livestock",
    "themes": [
     "genomics"
@@ -1544,7 +1544,7 @@
    "type": "article",
    "url": "https://doi.org/10.1186/s12711-017-0360-z",
    "oa_url": "https://gsejournal.biomedcentral.com/track/pdf/10.1186/s12711-017-0360-z",
-   "citations": 183,
+   "citations": 184,
    "topic": "Genetic and phenotypic traits in livestock",
    "themes": [
     "genomics"
@@ -1591,7 +1591,7 @@
    "year": 2016,
    "type": "chapter",
    "url": "http://hdl.handle.net/10447/221666",
-   "oa_url": "http://hdl.handle.net/10447/221666",
+   "oa_url": "http://dupuy.perso.math.cnrs.fr/IWSM2016/proceedingsVol2.pdf",
    "citations": 0,
    "topic": "Statistical Methods and Inference",
    "themes": [
